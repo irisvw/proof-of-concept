@@ -74,6 +74,12 @@ section {
     }
 }
 
+.tab-container:not(:has(.tab:target)) {
+    .tab:first-of-type {
+        display: block;
+    }
+}
+
 .tab-links {
     display: flex;
     list-style: none;
