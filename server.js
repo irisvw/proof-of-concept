@@ -39,6 +39,14 @@ app.get("/", async function (req, res) {
   });
 });
 
+app.get("/:pokemon", async function (req, res) {
+  let pokemon = allPokemon.find((pokemon) => pokemon.name == req.params.pokemon);
+  
+  res.render('detail.liquid', {
+    pokemon: pokemon
+  });
+});
+
 app.listen(app.get('port'), function () {
   console.log(`Application started on http://localhost:${app.get('port')}`);
 });
