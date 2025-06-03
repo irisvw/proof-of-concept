@@ -24,6 +24,10 @@ nav {
     gap: 1rem;
 }
 
+img {
+    max-width: 100vw;
+}
+
 input[type="radio"] {
     appearance: none;
 }
@@ -87,6 +91,8 @@ section {
 .tab:target {
     display: block;
 }
+
+.grid-dex {
     display: grid;
     grid-template-columns: repeat(2, minmax(125px, 1fr));
     gap: 1rem;
@@ -104,7 +110,50 @@ section {
     }
 }
 
-.searchbox {    
+.grid-dl {
+    display: grid;
+    grid-template-columns: fit-content 1fr;
+    padding: 1rem;
+
+    dd,
+    dt {
+        line-height: 2;
+        padding-inline: 1rem;
+    }
+
+    dt {
+        grid-column: 1 / 2;
+        border-radius: 1rem 0 0 1rem;
+        font-weight: 600;
+
+        &:nth-of-type(odd) {
+            background-color: var(--color-primary-daylight);
+        }
+    }
+
+    dd {
+        grid-column: 2 / 3;
+        justify-self: end;
+        text-align: end;
+        width: 100%;
+        border-radius: 0 1rem 1rem 0;
+
+        &:nth-of-type(odd) {
+            background-color: var(--color-primary-daylight);
+        }
+    }
+
+}
+
+.pokemon-id {
+    padding: 1rem 2rem;
+    background-color: var(--color-primary-purple);
+    color: white;
+    font-size: 2rem;
+    border-radius: 1.5rem;
+}
+
+.searchbox {
     display: grid;
     grid-template-columns: 1fr min-content;
     width: 100%;
@@ -155,7 +204,7 @@ section {
         background-color: var(--color-primary-daylight);
         border: none;
         border-radius: 0 var(--border-radius) var(--border-radius) 0;
-        
+
         &:hover {
             background-color: rgba(0, 0, 0, 0.1);
         }
