@@ -1,0 +1,20 @@
+{% render 'partials/head.liquid' %}
+
+<header>
+  <a href="/"><img
+      src="/assets/logo.webp"
+      alt=""
+      width="360"></a>
+</header>
+
+<main class="error">
+  <img
+    src="/assets/missingno.svg"
+    alt=""
+    width="100">
+  <h1>This pokemon was not found.</h1>
+  <p>Go back
+    <a href="/">home</a>?</p>
+</main>
+
+{% render 'partials/foot.liquid' %}
