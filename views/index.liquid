@@ -1,0 +1,41 @@
+{% render 'partials/head.liquid'
+  , title: 'All Pokémon' %}
+
+<header>
+  <img
+    src="/assets/logo.webp"
+    alt=""
+    width="500">
+  <h1>All Pokémon</h1>
+
+  <nav>
+    <label>
+      Search
+      <input type="search" placeholder="search">
+    </label>
+
+    <label>
+      All Pokemon
+      <input type="radio" name="display">
+    </label>
+
+    <label>
+      Caught Pokemon
+      <input type="radio" name="display">
+    </label>
+  </nav>
+</header>
+
+<main>
+  <ul>
+    {% for pokemon in allPokemon %}
+      <li>
+        <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
+        {{ pokemon.data.types[0].type.name }}
+        <img src="{{ pokemon.data.sprites.other.official-artwork.front_default }}" alt="">
+      </li>
+    {% endfor %}
+  </ul>
+</main>
+
+{% render 'partials/foot.liquid' %}

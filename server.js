@@ -13,6 +13,32 @@ app.set('views', './views');
 
 const apiBase = "https://pokeapi.co/api/v2/";
 
+const allPokemon = await getAllPokemon();
+
+async function getAllPokemon() {
+  const apiResponse = await fetch(`${apiBase}pokemon?limit=3`);
+  const apiResponseJSON = await apiResponse.json();
+  let allPokemon = apiResponseJSON.results;
+
+  await Promise.all(allPokemon.map(async (pokemon) => {
+    await getPokemonDetails(pokemon);
+  }));
+
+  return allPokemon;
+}
+
+async function getPokemonDetails(pokemon) {
+  const pokemonResponse = await fetch(pokemon.url);
+  const pokemonResponseJSON = await pokemonResponse.json();
+  pokemon.data = pokemonResponseJSON;
+}
+
+app.get("/", async function (req, res) {
+  res.render('index.liquid', {
+    allPokemon: allPokemon
+  });
+});
+
 app.listen(app.get('port'), function () {
   console.log(`Application started on http://localhost:${app.get('port')}`);
 });
