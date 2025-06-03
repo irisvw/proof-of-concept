@@ -5,18 +5,29 @@
   <img
     src="/assets/logo.webp"
     alt=""
-    width="500">
+    width="360">
   <h1>All Pokémon</h1>
 
   <nav>
-    <label>
-      Search
-      <input type="search" placeholder="search">
-    </label>
+    <form action="" class="searchbox">
+      <label for="search">
+        <input
+          type="search"
+          role="searchbox"
+          id="search"
+          placeholder=""
+          value="" />
+        <span>Search</span>
+      </label>
+      <button type="submit"><img src="/assets/search.svg" alt=""></button>
+    </form>
 
     <label>
       All Pokemon
-      <input type="radio" name="display">
+      <input
+        type="radio"
+        name="display"
+        checked>
     </label>
 
     <label>
@@ -27,11 +38,10 @@
 </header>
 
 <main>
-  <ul>
+  <ul class="grid">
     {% for pokemon in allPokemon %}
-      <li>
+      <li class="{{ pokemon.data.types[0].type.name }}">
         <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
-        {{ pokemon.data.types[0].type.name }}
         <img src="{{ pokemon.data.sprites.other.official-artwork.front_default }}" alt="">
       </li>
     {% endfor %}

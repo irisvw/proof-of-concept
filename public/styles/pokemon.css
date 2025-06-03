@@ -1,0 +1,101 @@
+:root {
+    --color-pokemon-type-grass: rgb(190, 226, 183);
+    --color-grass-secondary: #5d7e58;
+    --color-pokemon-type-normal: rgb(189, 189, 189);
+    --color-pokemon-type-fire: rgb(255, 179, 190);
+    --color-pokemon-type-water: rgb(165, 183, 255);
+    --color-pokemon-type-flying: rgb(170, 205, 255);
+    --color-pokemon-type-fighting: rgb(233, 168, 164);
+    --color-pokemon-type-poison: rgb(219, 191, 231);
+    --color-pokemon-type-electric: rgb(255, 233, 135);
+    --color-pokemon-type-ground: rgb(210, 158, 131);
+    --color-pokemon-type-rock: rgb(171, 171, 171);
+    --color-pokemon-type-psychic: rgb(255, 187, 244);
+    --color-pokemon-type-ice: rgb(157, 209, 255);
+    --color-pokemon-type-bug: rgb(199, 248, 204);
+    --color-pokemon-type-ghost: rgb(192, 149, 212);
+    --color-pokemon-type-steel: rgb(194, 194, 194);
+    --color-pokemon-type-dragon: rgb(106, 164, 245);
+    --color-pokemon-type-dark: rgb(153, 153, 153);
+    --color-pokemon-type-fairy: rgb(255, 161, 235);
+    --color-gray: rgb(231, 230, 236);
+    --color-primary-daylight: rgb(246, 246, 255);
+    --color-primary-purple: rgb(86, 49, 232);
+}
+
+.grass {
+    background-color: var(--color-pokemon-type-grass);
+}
+
+.normal {
+    background-color: var(--color-pokemon-type-normal);
+}
+
+.fire {
+    background-color: var(--color-pokemon-type-fire);
+}
+
+.water {
+    background-color: var(--color-pokemon-type-water);
+}
+
+.flying {
+    background-color: var(--color-pokemon-type-flying);
+}
+
+.fighting {
+    background-color: var(--color-pokemon-type-fighting);
+}
+
+.poison {
+    background-color: var(--color-pokemon-type-poison);
+}
+
+.electric {
+    background-color: var(--color-pokemon-type-electric);
+}
+
+.ground {
+    background-color: var(--color-pokemon-type-ground);
+}
+
+.rock {
+    background-color: var(--color-pokemon-type-rock);
+}
+
+.psychic {
+    background-color: var(--color-pokemon-type-psychic);
+}
+
+.ice {
+    background-color: var(--color-pokemon-type-ice);
+}
+
+.bug {
+    background-color: var(--color-pokemon-type-bug);
+}
+
+.ghost {
+    background-color: var(--color-pokemon-type-ghost);
+}
+
+.steel {
+    background-color: var(--color-pokemon-type-steel);
+}
+
+.dragon {
+    background-color: var(--color-pokemon-type-dragon);
+}
+
+.dark {
+    background-color: var(--color-pokemon-type-dark);
+}
+
+.fairy {
+    background-color: var(--color-pokemon-type-fairy);
+}
+
+body {
+    --font-primary: 'rubik', sans-serif;
+    --border-radius: 1rem;
+}

@@ -16,7 +16,7 @@ const apiBase = "https://pokeapi.co/api/v2/";
 const allPokemon = await getAllPokemon();
 
 async function getAllPokemon() {
-  const apiResponse = await fetch(`${apiBase}pokemon?limit=3`);
+  const apiResponse = await fetch(`${apiBase}pokemon?limit=15`);
   const apiResponseJSON = await apiResponse.json();
   let allPokemon = apiResponseJSON.results;
 
