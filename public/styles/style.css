@@ -91,6 +91,7 @@ section {
     @media (width > 800px) {
         margin: 0;
         border-radius: 0;
+        max-height: 100dvh;
     }
 }
 
