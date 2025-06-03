@@ -63,7 +63,7 @@ main {
     margin: 1rem;
 
     @media (width > 800px) {
-        max-height: 100dvh;
+        max-height: calc(100dvh - 2rem);
         width: 100%;
         overflow-y: auto;
     }
@@ -86,6 +86,11 @@ section {
     h1 {
         padding: 1rem 0;
         text-align: center;
+    }
+
+    @media (width > 800px) {
+        margin: 0;
+        border-radius: 0;
     }
 }
 
@@ -139,6 +144,7 @@ section {
             object-fit: contain;
             float: right;
         }
+
         a {
             display: block;
             width: 100%;
