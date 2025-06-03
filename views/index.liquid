@@ -2,52 +2,52 @@
   , title: 'All Pokémon' %}
 
 <body>
-<header>
-  <img
-    src="/assets/logo.webp"
-    alt=""
-    width="360">
-  <h1>All Pokémon</h1>
+  <header>
+    <img
+      src="/assets/logo.webp"
+      alt=""
+      width="360">
+    <h1>All Pokémon</h1>
 
-  <nav>
-    <form action="" class="searchbox">
-      <label for="search">
+    <nav>
+      <form action="" class="searchbox">
+        <label for="search">
+          <input
+            type="search"
+            role="searchbox"
+            id="search"
+            placeholder=""
+            value="" />
+          <span>Search</span>
+        </label>
+        <button type="submit"><img src="/assets/search.svg" alt=""></button>
+      </form>
+
+      <label>
+        All Pokemon
         <input
-          type="search"
-          role="searchbox"
-          id="search"
-          placeholder=""
-          value="" />
-        <span>Search</span>
+          type="radio"
+          name="display"
+          checked>
       </label>
-      <button type="submit"><img src="/assets/search.svg" alt=""></button>
-    </form>
 
-    <label>
-      All Pokemon
-      <input
-        type="radio"
-        name="display"
-        checked>
-    </label>
+      <label>
+        Caught Pokemon
+        <input type="radio" name="display">
+      </label>
+    </nav>
+  </header>
 
-    <label>
-      Caught Pokemon
-      <input type="radio" name="display">
-    </label>
-  </nav>
-</header>
-
-<main>
-  <ul class="grid">
-    {% for pokemon in allPokemon %}
-      <li class="{{ pokemon.data.types[0].type.name }}">
-        <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
-        <img src="{{ pokemon.data.sprites.other.official-artwork.front_default }}" alt="">
-      </li>
-    {% endfor %}
-  </ul>
-</main>
+  <main>
+    <ul class="grid-dex">
+      {% for pokemon in allPokemon %}
+        <li class="{{ pokemon.data.types[0].type.name }}">
+          <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
+          <img src="{{ pokemon.data.sprites.other.official-artwork.front_default }}" alt="">
+        </li>
+      {% endfor %}
+    </ul>
+  </main>
 </body>
 
 {% render 'partials/foot.liquid' %}
