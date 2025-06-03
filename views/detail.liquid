@@ -15,52 +15,68 @@
       alt=""
       width="200">
   </header>
-<h1>{{ pokemon.name | capitalize }}</h1>
 
-<img src="{{ pokemon.data.sprites.other.official-artwork.front_default }}" alt="">
 
-<section>
-  <h2>About</h2>
-  <dl>
-    <dt>Name:</dt>
-    <dd>{{ pokemon.name | capitalize }}</dd>
-    <dt>ID:</dt>
-    <dd>{{ pokemon.data.id | prepend: '000' | slice: -3, 3 }}</dd>
-    <dt>Base XP:</dt>
-    <dd>{{ pokemon.data.base_experience }}</dd>
-    <dt>Weight:</dt>
-    <dd>{{ pokemon.data.weight | divided_by: 10 }}kg</dd>
-    <dt>Height:</dt>
-    <dd>{{ pokemon.data.height | divided_by: 10 }}m</dd>
-    <dt>Type:</dt>
-    <dd>{{ pokemon.data.types[0].type.name | capitalize }} {{ pokemon.data.types[1].type.name | capitalize }}</dd>
-    <dt>Abilities:</dt>
-    <dd>{{ pokemon.data.abilities[0].ability.name | capitalize }}, {{ pokemon.data.abilities[1].ability.name | capitalize }}</dd>
-  </dl>
-</section>
+  <main class="tab-container">
+    <h1>{{ pokemon.name | capitalize }}</h1>
 
-<section>
-  <h2>Stats</h2>
-  <dl>
-    <dt>{{ pokemon.data.stats[0].stat.name | capitalize }}</dt>
-    <dd>{{ pokemon.data.stats[0].base_stat }}</dd>
-    <dt>{{ pokemon.data.stats[1].stat.name | capitalize }}</dt>
-    <dd>{{ pokemon.data.stats[1].base_stat }}</dd>
-    <dt>{{ pokemon.data.stats[2].stat.name | capitalize }}</dt>
-    <dd>{{ pokemon.data.stats[2].base_stat }}</dd>
-    <dt>{{ pokemon.data.stats[3].stat.name | capitalize }}</dt>
-    <dd>{{ pokemon.data.stats[3].base_stat }}</dd>
-    <dt>{{ pokemon.data.stats[4].stat.name | capitalize }}</dt>
-    <dd>{{ pokemon.data.stats[4].base_stat }}</dd>
-    <dt>{{ pokemon.data.stats[5].stat.name | capitalize }}</dt>
-    <dd>{{ pokemon.data.stats[5].base_stat }}</dd>
-  </dl>
-</section>
+    <ul class="tab-links">
+      <li>
+        <a href="#about">About</a>
+      </li>
+      <li>
+        <a href="#stats">Stats</a>
+      </li>
+      <li>
+        <a href="#evolutions">Evolutions</a>
+      </li>
+    </ul>
 
-<h2>Evolutions</h2>
-<ul>
-  <li></li>
-</ul>
+    <section class="tab" id="about">
+      {% comment %} <h2>About</h2> {% endcomment %}
+      <dl class="grid-dl">
+        <dt>Name</dt>
+        <dd>{{ pokemon.name | capitalize }}</dd>
+        <dt>ID</dt>
+        <dd>{{ pokemon.data.id | prepend: '000' | slice: -3, 3 }}</dd>
+        <dt>Base XP</dt>
+        <dd>{{ pokemon.data.base_experience }}</dd>
+        <dt>Weight</dt>
+        <dd>{{ pokemon.data.weight | divided_by: 10 }}kg</dd>
+        <dt>Height</dt>
+        <dd>{{ pokemon.data.height | divided_by: 10 }}m</dd>
+        <dt>Type</dt>
+        <dd>{{ pokemon.data.types[0].type.name | capitalize }} {{ pokemon.data.types[1].type.name | capitalize }}</dd>
+        <dt>Abilities</dt>
+        <dd>{{ pokemon.data.abilities[0].ability.name | capitalize }}, {{ pokemon.data.abilities[1].ability.name | capitalize }}</dd>
+      </dl>
+    </section>
+
+    <section class="tab" id="stats">
+      {% comment %} <h2>Stats</h2> {% endcomment %}
+      <dl class="grid-dl">
+        <dt>{{ pokemon.data.stats[0].stat.name | capitalize }}</dt>
+        <dd>{{ pokemon.data.stats[0].base_stat }}</dd>
+        <dt>{{ pokemon.data.stats[1].stat.name | capitalize }}</dt>
+        <dd>{{ pokemon.data.stats[1].base_stat }}</dd>
+        <dt>{{ pokemon.data.stats[2].stat.name | capitalize }}</dt>
+        <dd>{{ pokemon.data.stats[2].base_stat }}</dd>
+        <dt>{{ pokemon.data.stats[3].stat.name | capitalize }}</dt>
+        <dd>{{ pokemon.data.stats[3].base_stat }}</dd>
+        <dt>{{ pokemon.data.stats[4].stat.name | capitalize }}</dt>
+        <dd>{{ pokemon.data.stats[4].base_stat }}</dd>
+        <dt>{{ pokemon.data.stats[5].stat.name | capitalize }}</dt>
+        <dd>{{ pokemon.data.stats[5].base_stat }}</dd>
+      </dl>
+    </section>
+
+    <section class="tab" id="evolutions">
+      {% comment %} <h2>Evolutions</h2> {% endcomment %}
+      <ul>
+        <li></li>
+      </ul>
+    </section>
+  </main>
 </body>
 
 {% render 'partials/foot.liquid' %}
