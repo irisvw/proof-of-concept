@@ -3,8 +3,7 @@
 {% render 'partials/head.liquid'
   , title: title %}
 
-<a href="/"><img src="/assets/logo.webp" alt=""></a>
-<p>{{ pokemon.data.id | prepend: '000' | slice: -3, 3 }}</p>
+<body class="{{ pokemon.data.types[0].type.name }}">
 <h1>{{ pokemon.name | capitalize }}</h1>
 
 <img src="{{ pokemon.data.sprites.other.official-artwork.front_default }}" alt="">
@@ -51,5 +50,6 @@
 <ul>
   <li></li>
 </ul>
+</body>
 
 {% render 'partials/foot.liquid' %}
