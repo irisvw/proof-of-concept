@@ -150,7 +150,7 @@ section {
             display: block;
             width: 100%;
             font-size: clamp(1rem, 0.8rem + 1vw, 2rem);
-            color: rgb(58, 16, 92);
+            color: rgb(47 21 149);
             text-decoration: none;
         }
 
@@ -199,6 +199,18 @@ section {
         }
     }
 
+}
+
+main.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: auto;
+
+    h1 {
+        text-align: center;
+    }
 }
 
 .pokemon-id {
