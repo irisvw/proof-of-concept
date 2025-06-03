@@ -4,6 +4,17 @@
   , title: title %}
 
 <body class="{{ pokemon.data.types[0].type.name }}">
+  <header>
+    <a href="/"><img
+        src="/assets/logo.webp"
+        alt=""
+        width="360"></a>
+    <p class="pokemon-id">{{ pokemon.data.id | prepend: '000' | slice: -3, 3 }}</p>
+    <img
+      src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
+      alt=""
+      width="200">
+  </header>
 <h1>{{ pokemon.name | capitalize }}</h1>
 
 <img src="{{ pokemon.data.sprites.other.official-artwork.front_default }}" alt="">
