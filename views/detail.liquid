@@ -73,9 +73,19 @@
 
     <section class="tab" id="evolutions">
       {% comment %} <h2>Evolutions</h2> {% endcomment %}
-      <ul>
-        <li></li>
-      </ul>
+      {% if evolution %}
+        <ul>
+          <li>{{ evolution.chain.species.name | capitalize }}</li>
+
+          {% for evolution in evolution.chain.evolves_to %}
+            <li>{{ evolution.species.name | capitalize }}</li>
+          {% endfor %}
+
+          {% for evolution in evolution.chain.evolves_to.0.evolves_to %}
+            <li>{{ evolution.species.name | capitalize }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     </section>
   </main>
 </body>
