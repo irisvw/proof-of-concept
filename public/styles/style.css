@@ -105,7 +105,23 @@ label:has(input[type="radio"]:checked) {
     display: flex;
     list-style: none;
     justify-content: center;
-    gap: 1rem;
+    font-size: clamp(1rem, 0.8rem + 1vw, 2rem);
+    
+    li {
+        padding-bottom: .25rem;
+        border-bottom: .5rem solid lightgrey;
+
+        &:first-child {
+            border-bottom: .5rem solid var(--color-primary-purple);
+        }
+    }
+
+    a {
+        padding-block: .5rem;
+        padding-inline: clamp(.5rem, 1vw, 1rem);
+        text-decoration: none;
+        font-weight: 600;
+    }
 }
 
 .tab {
