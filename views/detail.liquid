@@ -66,15 +66,47 @@
     <section class="tab" id="evolutions">
       {% comment %} <h2>Evolutions</h2> {% endcomment %}
       {% if evolution %}
-        <ul>
-          <li>{{ evolution.chain.species.name | capitalize }}</li>
+        <ul class="list-evolutions">
+          {% comment %} Base evolution {% endcomment %}
+          <li>
+            <img
+              src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
+              alt=""
+              height="100"
+              class="{{ pokemon.data.types[0].type.name }}">
+            <p class="pokemon-id">{{ pokemon.data.id }}</p>
+            <a href="/{{ evolution.chain.species.name }}">{{ evolution.chain.species.name | capitalize }}</a>
+          </li>
 
+          {% comment %} First stage evolutions {% endcomment %}
           {% for evolution in evolution.chain.evolves_to %}
-            <li>{{ evolution.species.name | capitalize }}</li>
+            <li>
+              {% comment %} a {{ evolution.species.name }} b {% endcomment %}
+              {% comment %} {% assign name = evolution.species.name %} {% endcomment %}
+              {% comment %} {% assign pokemon = allPokemon | find: "name", evolution.species.name %} {% endcomment %}
+              {% comment %} {{ pokemon | json | default: "notfound" }} {% endcomment %}
+
+              <img
+                src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
+                alt=""
+                height="100"
+                class="{{ pokemon.data.types[0].type.name }}">
+              <p class="pokemon-id">{{ pokemon.data.id }}</p>
+              <a href="/{{ evolution.chain.species.name }}">{{ evolution.species.name | capitalize }}</a>
+            </li>
           {% endfor %}
 
+          {% comment %} Second stage evolutions {% endcomment %}
           {% for evolution in evolution.chain.evolves_to.0.evolves_to %}
-            <li>{{ evolution.species.name | capitalize }}</li>
+            <li>
+              <img
+                src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
+                alt=""
+                height="100"
+                class="{{ pokemon.data.types[0].type.name }}">
+              <p class="pokemon-id">{{ pokemon.data.id }}</p>
+              <a href="/{{ evolution.chain.species.name }}">{{ evolution.species.name | capitalize }}</a>
+            </li>
           {% endfor %}
         </ul>
       {% endif %}
