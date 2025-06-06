@@ -214,8 +214,44 @@ label:has(input[type="radio"]:checked) {
             background-color: var(--color-primary-daylight);
         }
     }
-
 }
+
+.list-evolutions {
+    margin: 1rem;
+    list-style: none;
+
+    li {
+        display: grid;
+        grid-template-columns: min-content 1fr;
+        grid-template-areas:
+        "image id"
+        "image name";
+        gap: 0 1rem;
+
+        margin-block: 1rem;
+        border-radius: 1rem;
+        box-shadow: 1px 1px 3px 0px #0000002f;
+        overflow: hidden;
+
+        img {
+            grid-area: image;
+            padding: 1rem;
+        }
+
+        p {
+            font-size: 1rem;
+            grid-area: id;
+            align-self: center;
+        }
+
+        a {
+            grid-area: name;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+    }
+}
+
 
 main.error {
     display: flex;
@@ -230,11 +266,12 @@ main.error {
 }
 
 .pokemon-id {
-    padding: 1rem 2rem;
+    padding: .5em 1em;
+    width: fit-content;
     background-color: var(--color-primary-purple);
     color: white;
     font-size: 2rem;
-    border-radius: 1.5rem;
+    border-radius: 1em;
 }
 
 .searchbox {
