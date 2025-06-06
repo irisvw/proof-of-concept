@@ -246,8 +246,8 @@ label:has(input[type="radio"]:checked) {
         display: grid;
         grid-template-columns: min-content 1fr;
         grid-template-areas:
-        "image id"
-        "image name";
+            "image id"
+            "image name";
         gap: 0 1rem;
 
         margin-block: 1rem;
@@ -359,5 +359,5 @@ main.error {
 }
 
 @view-transition {
-  navigation: auto;
+    navigation: auto;
 }
