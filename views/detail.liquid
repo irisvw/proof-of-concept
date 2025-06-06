@@ -56,18 +56,10 @@
     <section class="tab" id="stats">
       {% comment %} <h2>Stats</h2> {% endcomment %}
       <dl class="grid-dl">
-        <dt>{{ pokemon.data.stats[0].stat.name | capitalize }}</dt>
-        <dd>{{ pokemon.data.stats[0].base_stat }}</dd>
-        <dt>{{ pokemon.data.stats[1].stat.name | capitalize }}</dt>
-        <dd>{{ pokemon.data.stats[1].base_stat }}</dd>
-        <dt>{{ pokemon.data.stats[2].stat.name | capitalize }}</dt>
-        <dd>{{ pokemon.data.stats[2].base_stat }}</dd>
-        <dt>{{ pokemon.data.stats[3].stat.name | capitalize }}</dt>
-        <dd>{{ pokemon.data.stats[3].base_stat }}</dd>
-        <dt>{{ pokemon.data.stats[4].stat.name | capitalize }}</dt>
-        <dd>{{ pokemon.data.stats[4].base_stat }}</dd>
-        <dt>{{ pokemon.data.stats[5].stat.name | capitalize }}</dt>
-        <dd>{{ pokemon.data.stats[5].base_stat }}</dd>
+        {% for stat in pokemon.data.stats %}
+          <dt>{{ stat.stat.name | capitalize }}</dt>
+          <dd>{{ stat.base_stat }}</dd>
+        {% endfor %}
       </dl>
     </section>
 
