@@ -8,8 +8,16 @@ body {
     font-family: var(--font-primary);
     min-height: 100dvh;
 
+    &.pokeball-bg {
+        background-position: center;
+    }
+
     @media (width > 800px) {
         display: flex;
+
+        &.pokeball-bg {
+        background-position: bottom left;
+    }
     }
 }
 
@@ -117,7 +125,7 @@ label:has(input[type="radio"]:checked) {
     list-style: none;
     justify-content: center;
     font-size: clamp(1rem, 0.8rem + 1vw, 2rem);
-    
+
     li {
         padding-bottom: .25rem;
         border-bottom: .5rem solid lightgrey;
@@ -146,6 +154,12 @@ label:has(input[type="radio"]:checked) {
     display: block;
 }
 
+.pokeball-bg {
+    background-image: url("/assets/ball-background.svg");
+    background-blend-mode: soft-light;
+    background-repeat: no-repeat;
+}
+
 .grid-dex {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(50%, max(125px, 33%)), 1fr));
@@ -161,10 +175,7 @@ label:has(input[type="radio"]:checked) {
         list-style: none;
         border-radius: var(--border-radius);
         aspect-ratio: 3 / 2;
-        background-image: url("/assets/ball-background.svg");
-        background-blend-mode: soft-light;
         background-size: 100%;
-        background-repeat: no-repeat;
         background-position: bottom -5rem right -3rem;
 
         img {
