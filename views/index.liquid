@@ -93,7 +93,7 @@
   <main>
     <ul class="grid-dex">
       {% for pokemon in allPokemon %}
-        <li class="{{ pokemon.data.types[0].type.name }}">
+        <li class="{{ pokemon.data.types[0].type.name }} pokeball-bg">
           <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
           <img
             src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
