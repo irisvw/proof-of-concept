@@ -18,7 +18,7 @@ const allPokemon = await getAllPokemon();
 
 // FUNCTIONS
 async function getAllPokemon() {
-  const apiResponse = await fetch(`${prefix}pokemon?limit=1000`);
+  const apiResponse = await fetch(`${prefix}pokemon?limit=151`);
   const apiResponseJSON = await apiResponse.json();
   let allPokemon = apiResponseJSON.results;
 
@@ -35,7 +35,7 @@ async function getPokemonDetails(pokemon) {
   pokemon.data = pokemonResponseJSON;
 }
 
-async function getEvolutionData(pokemon) {
+async function getEvolutionChain(pokemon) {
   let pokemonSpeciesData = await fetch(`${prefix}pokemon-species/${pokemon.name}`);
   if (pokemonSpeciesData.status == 404) { return {} };
 
@@ -48,9 +48,21 @@ async function getEvolutionData(pokemon) {
 
 function getEvolutionDetails(evolutionData) {
   let evolutionDetails = [];
-  let stageTwoArray = evolutionData.chain.evolves_to;
+  
+  // stage 0
+  let pokemon = allPokemon.find((pokemon) => pokemon.name == evolutionData.chain.species.name);
+  evolutionDetails.push({ 
+      name: pokemon.name, 
+      id: pokemon.data.id, 
+      type: pokemon.data.types[0].type.name, 
+      sprite: pokemon.data.sprites.other['official-artwork'].front_default,
+      evolutions: [],
+    });
 
-  stageTwoArray.forEach((evolution) => {
+  // stage 1
+  let stageOneArray = evolutionData.chain.evolves_to;
+
+  stageOneArray.forEach((evolution) => {
     let pokemon = allPokemon.find((pokemon) => pokemon.name == evolution.species.name);
     evolutionDetails.push({ 
       name: pokemon.name, 
@@ -61,6 +73,7 @@ function getEvolutionDetails(evolutionData) {
     });
   });
 
+  // stage 2
   evolutionDetails.forEach((pokemon) => {
     if (pokemon.evolutions.length > 0) {
       pokemon.evolutions.forEach((evolution) => {
@@ -89,8 +102,8 @@ app.get("/:pokemon", async function (req, res) {
   let pokemon = allPokemon.find((pokemon) => pokemon.name == req.params.pokemon);
 
   if (pokemon) {
-    let evolutions = await getEvolutionData(pokemon);
-    let evolutionsDetails = await getEvolutionDetails(evolutions);
+    let evolutions = await getEvolutionChain(pokemon);
+    let evolutionsDetails = getEvolutionDetails(evolutions);
 
     res.render('detail.liquid', {
       pokemon: pokemon,
