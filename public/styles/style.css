@@ -35,8 +35,6 @@ header {
 }
 
 main {
-    margin: 1rem;
-
     @media (width > 800px) {
         max-height: calc(100dvh - 2rem);
         width: 100%;
@@ -101,6 +99,7 @@ label:has(input[type="radio"]:checked) {
 .tab-container {
     background-color: white;
     border-radius: var(--border-radius);
+    margin: 1rem;
 
     h1 {
         padding: 1rem 0;
@@ -164,6 +163,7 @@ label:has(input[type="radio"]:checked) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(50%, max(125px, 33%)), 1fr));
     gap: 1rem;
+    padding: 1rem;  
 
     @media (width > 800px) {
         grid-template-columns: repeat(auto-fill, minmax(min(50%, max(200px, 20%)), 1fr));
@@ -201,6 +201,28 @@ label:has(input[type="radio"]:checked) {
             bottom: 0;
             left: 0;
         }
+
+        &:focus-within {
+            outline: 5px solid blue;
+            outline-offset: 5px;
+            animation: game-focus .5s ease alternate infinite;
+
+            img {
+                scale: 1.1;
+                transition: .2s all;
+            }
+        }
+    }
+}
+
+
+@keyframes game-focus {
+    from {
+        outline-color: var(--color-primary-purple);
+    }
+
+    to {
+        outline-color: rgb(47 21 149);
     }
 }
 
