@@ -260,6 +260,12 @@ label:has(input[type="radio"]:checked) {
     }
 }
 
+span.type {
+    padding: .25em .5em;
+    border-radius: .5rem;
+    font-weight: 600;
+}
+
 .list-evolutions {
     margin: 1rem;
     list-style: none;

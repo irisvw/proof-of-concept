@@ -92,13 +92,14 @@
 
   <main>
     <ul class="grid-dex">
-      {% for pokemon in allPokemon %}
+      {% for pokemon in allPokemon limit: 12 %}
         <li class="{{ pokemon.data.types[0].type.name }} pokeball-bg">
           <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
           <img
             src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
             alt=""
-            style="view-transition-name: {{ pokemon.name }}">
+            style="view-transition-name: {{ pokemon.name }}"
+            loading="lazy">
         </li>
       {% endfor %}
     </ul>
