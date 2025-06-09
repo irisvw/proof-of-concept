@@ -182,6 +182,14 @@ label:has(input[type="radio"]:checked) {
             height: 100%;
             object-fit: contain;
             float: right;
+            transition: .2s all;
+        }
+
+        &:hover {
+            img {
+                scale: 1.1;
+                transition: .2s all;
+            }
         }
 
         a {
