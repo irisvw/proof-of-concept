@@ -9,12 +9,14 @@
         src="/assets/logo.webp"
         alt=""
         width="360"></a>
-    <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
-    <img
-      src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
-      alt=""
-      width="200"
-      style="view-transition-name: {{ pokemon.name }}">
+    <div>
+      <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
+      <img
+        src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
+        alt=""
+        width="200"
+        style="view-transition-name: {{ pokemon.name }}">
+    </div>
   </header>
 
 
