@@ -190,6 +190,18 @@ label:has(input[type="radio"]:checked) {
             font-size: clamp(1rem, 0.8rem + 1vw, 2rem);
             color: rgb(47 21 149);
             text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            &:visited {
+                color: rgb(47 21 149);
+            }
+
+            &:focus {
+                outline: none;
+            }
         }
 
         a::after {
