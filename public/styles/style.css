@@ -37,7 +37,7 @@ header {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;        
+        align-items: center;
         gap: 1rem;
     }
 }
@@ -172,7 +172,7 @@ label:has(input[type="radio"]:checked) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(50%, max(125px, 33%)), 1fr));
     gap: 1rem;
-    padding: 1rem;  
+    padding: 1rem;
 
     @media (width > 800px) {
         grid-template-columns: repeat(auto-fill, minmax(min(50%, max(200px, 20%)), 1fr));
@@ -186,6 +186,7 @@ label:has(input[type="radio"]:checked) {
         aspect-ratio: 3 / 2;
         background-size: 100%;
         background-position: bottom -5rem right -3rem;
+        transition: .2s all;
 
         img {
             height: 100%;
@@ -194,10 +195,15 @@ label:has(input[type="radio"]:checked) {
             transition: .2s all;
         }
 
-        &:hover {
-            img {
-                scale: 1.1;
+        @media (prefers-reduced-motion: no-preference) {
+            &:hover {
                 transition: .2s all;
+                background-size: 105%;
+
+                img {
+                    scale: 1.1;
+                    transition: .2s all;
+                }
             }
         }
 
@@ -236,6 +242,8 @@ label:has(input[type="radio"]:checked) {
             outline: 5px solid blue;
             outline-offset: 5px;
             animation: game-focus .5s ease alternate infinite;
+            transition: .2s all;
+            background-size: 105%;
 
             img {
                 scale: 1.1;
@@ -244,7 +252,6 @@ label:has(input[type="radio"]:checked) {
         }
     }
 }
-
 
 @keyframes game-focus {
     from {
