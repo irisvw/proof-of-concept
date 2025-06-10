@@ -43,7 +43,18 @@ async function getAllPokemon() {
 async function getPokemonDetails(pokemon) {
   const pokemonResponse = await fetch(pokemon.url);
   const pokemonResponseJSON = await pokemonResponse.json();
-  pokemon.data = pokemonResponseJSON;
+  // pokemon.data = pokemonResponseJSON;
+  pokemon.data = {
+    id: pokemonResponseJSON.id,
+    baseXP: pokemonResponseJSON.base_experience,
+    weight: pokemonResponseJSON.weight,
+    height: pokemonResponseJSON.height,
+    abilities: pokemonResponseJSON.abilities,
+    types: pokemonResponseJSON.types,
+    sprite: pokemonResponseJSON.sprites.other['official-artwork'].front_default,
+    stats: pokemonResponseJSON.stats,
+    evolutionChain: pokemonResponseJSON.species.url
+  };
 }
 
 async function getEvolutionChain(pokemon) {
@@ -66,7 +77,7 @@ function getEvolutionDetails(evolutionData) {
       name: pokemon.name, 
       id: pokemon.data.id, 
       type: pokemon.data.types[0].type.name, 
-      sprite: pokemon.data.sprites.other['official-artwork'].front_default,
+    sprite: pokemon.data.sprite,
       evolutions: [],
     });
 
@@ -79,7 +90,7 @@ function getEvolutionDetails(evolutionData) {
       name: pokemon.name, 
       id: pokemon.data.id, 
       type: pokemon.data.types[0].type.name, 
-      sprite: pokemon.data.sprites.other['official-artwork'].front_default,
+      sprite: pokemon.data.sprite,
       evolutions: evolution.evolves_to 
     });
   });
@@ -93,7 +104,7 @@ function getEvolutionDetails(evolutionData) {
           name: pokemon.name, 
           id: pokemon.data.id, 
           type: pokemon.data.types[0].type.name, 
-          sprite: pokemon.data.sprites.other['official-artwork'].front_default,
+          sprite: pokemon.data.sprite,
         });
       })
     }

@@ -12,7 +12,7 @@
     <div>
       <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
       <img
-        src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
+        src="{{ pokemon.data.sprite }}"
         alt=""
         width="200"
         style="view-transition-name: {{ pokemon.name }}">
@@ -43,7 +43,7 @@
         <dt>ID</dt>
         <dd>{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</dd>
         <dt>Base XP</dt>
-        <dd>{{ pokemon.data.base_experience }}</dd>
+        <dd>{{ pokemon.data.baseXP }}</dd>
         <dt>Weight</dt>
         <dd>{{ pokemon.data.weight | divided_by: 10 }}kg</dd>
         <dt>Height</dt>
