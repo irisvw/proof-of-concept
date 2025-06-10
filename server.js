@@ -14,11 +14,14 @@ app.set('views', './views');
 
 // VARIABLES
 const prefix = "https://pokeapi.co/api/v2/";
-const allPokemon = await getAllPokemon();
+
+// const allPokemon = await getAllPokemon();
+const allPokemonFile = await readFile('./allPokemon.json', { encoding: 'utf8' });
+const allPokemon = JSON.parse(allPokemonFile);
 
 // FUNCTIONS
 async function getAllPokemon() {
-  const apiResponse = await fetch(`${prefix}pokemon?limit=151`);
+  const apiResponse = await fetch(`${prefix}pokemon?limit=10000`);
   const apiResponseJSON = await apiResponse.json();
   let allPokemon = apiResponseJSON.results;
 
@@ -26,8 +29,16 @@ async function getAllPokemon() {
     await getPokemonDetails(pokemon);
   }));
 
+  writeFile('./allPokemon.json', JSON.stringify(allPokemon), err => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('file written successfully'); 
+    }
+  });
+
   return allPokemon;
-}
+};
 
 async function getPokemonDetails(pokemon) {
   const pokemonResponse = await fetch(pokemon.url);
@@ -44,7 +55,7 @@ async function getEvolutionChain(pokemon) {
   let evolutionChainData = await fetch(pokemonEvolutionChainURL);
 
   return await evolutionChainData.json();
-}
+};
 
 function getEvolutionDetails(evolutionData) {
   let evolutionDetails = [];
@@ -89,7 +100,7 @@ function getEvolutionDetails(evolutionData) {
   });
 
   return evolutionDetails;
-}
+};
 
 // ROUTES
 app.get("/", async function (req, res) {
