@@ -76,12 +76,22 @@
         {% for evolution in evolutions %}
           <li>
             <img
-              src="{{ evolution.sprite }}"
+              src="{{ evolution.data.sprite }}"
               alt=""
               height="100"
-              class="{{ evolution.type }}">
-            <p class="pokemon-id">{{ evolution.id | prepend: '0000' | slice: -4, 4 }}</p>
+              class="{{ evolution.data.types[0].type.name }}">
+            <p class="pokemon-id">{{ evolution.data.id | prepend: '0000' | slice: -4, 4 }}</p>
             <a href="/{{ evolution.name }}">{{ evolution.name | capitalize }}</a>
+          </li>
+        {% else %}
+          <li>
+            <img
+              src="{{ pokemon.data.sprite }}"
+              alt=""
+              height="100"
+              class="{{ pokemon.data.types[0].type.name }}">
+            <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
+            <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
           </li>
         {% endfor %}
       </ul>

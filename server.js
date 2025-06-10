@@ -35,7 +35,7 @@ async function getAllPokemon() {
     if (err) {
       console.error(err);
     } else {
-      console.log('file written successfully'); 
+      console.log('file written successfully');
     }
   });
 
@@ -75,26 +75,15 @@ function getEvolutionDetails(evolutionData) {
   
   // stage 0
   let pokemon = allPokemon.find((pokemon) => pokemon.name == evolutionData.chain.species.name);
-  evolutionDetails.push({ 
-      name: pokemon.name, 
-      id: pokemon.data.id, 
-      type: pokemon.data.types[0].type.name, 
-    sprite: pokemon.data.sprite,
-      evolutions: [],
-    });
+  pokemon.evolutions = [];
+  evolutionDetails.push(pokemon);
 
   // stage 1
   let stageOneArray = evolutionData.chain.evolves_to;
-
   stageOneArray.forEach((evolution) => {
     let pokemon = allPokemon.find((pokemon) => pokemon.name == evolution.species.name);
-    evolutionDetails.push({ 
-      name: pokemon.name, 
-      id: pokemon.data.id, 
-      type: pokemon.data.types[0].type.name, 
-      sprite: pokemon.data.sprite,
-      evolutions: evolution.evolves_to 
-    });
+    pokemon.evolutions = evolution.evolves_to;
+    evolutionDetails.push(pokemon);
   });
 
   // stage 2
@@ -102,12 +91,7 @@ function getEvolutionDetails(evolutionData) {
     if (pokemon.evolutions.length > 0) {
       pokemon.evolutions.forEach((evolution) => {
         let pokemon = allPokemon.find((pokemon) => pokemon.name == evolution.species.name);
-        evolutionDetails.push({ 
-          name: pokemon.name, 
-          id: pokemon.data.id, 
-          type: pokemon.data.types[0].type.name, 
-          sprite: pokemon.data.sprite,
-        });
+        evolutionDetails.push(pokemon);
       })
     }
   });
@@ -136,7 +120,7 @@ app.get("/:pokemon", async function (req, res) {
 
   if (pokemon) {
     let evolutions = await getEvolutionChain(pokemon);
-    let evolutionsDetails = getEvolutionDetails(evolutions);
+    let evolutionsDetails = (Object.keys(evolutions).length == 0) ? [] : getEvolutionDetails(evolutions);
 
     res.render('detail.liquid', {
       pokemon: pokemon,
