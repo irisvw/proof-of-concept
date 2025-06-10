@@ -207,6 +207,7 @@ label:has(input[type="radio"]:checked) {
             font-size: clamp(1rem, 0.8rem + 1vw, 2rem);
             color: rgb(47 21 149);
             text-decoration: none;
+            text-transform: capitalize;
 
             &:hover {
                 text-decoration: underline;
@@ -253,6 +254,26 @@ label:has(input[type="radio"]:checked) {
     to {
         outline-color: rgb(47 21 149);
     }
+}
+
+.button-load-more {
+    display: block;
+    position: fixed;
+    z-index: 2;
+    bottom: 2%;
+    left: 0;
+    right: 0;
+
+    margin: 0 auto;
+    width: max-content;
+
+    font-size: 1rem;
+    font-family: inherit;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    background-color: var(--color-primary-purple);
+    color: white;
+    border: none;
 }
 
 .grid-dl {

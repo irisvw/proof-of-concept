@@ -107,6 +107,50 @@
       {% endfor %}
     </ul>
   </main>
+
+  <button class="button-load-more">Load More</button>
 </body>
 
 {% render 'partials/foot.liquid' %}
+
+<script>
+  let offset = 12;
+  let limit = 12;
+  let button = document.querySelector('.button-load-more');
+  let dex = document.querySelector('.grid-dex');
+  let allPokemon = {{ allPokemon | json }}
+  
+  button.addEventListener('click', () => {
+    loadMorePokemon(allPokemon, offset, limit);
+    offset += 12;
+  })
+  
+  function loadMorePokemon(array, offset, limit) {
+    let selection = array.slice(offset, offset + limit);
+  
+    selection.forEach(element => {
+      listItem = generateListItem(element)
+      console.log(listItem);
+      dex.appendChild(listItem);
+    });
+  }
+  
+  function generateListItem(pokemon) {
+    let listItem = document.createElement('li');
+    let anchor = document.createElement('a');
+    let image = document.createElement('img');
+  
+    listItem.classList.add(pokemon.data.types[0].type.name, 'pokeball-bg');
+  
+    anchor.innerHTML = pokemon.name;
+    anchor.setAttribute('href', `/${pokemon.name}`);
+  
+    image.setAttribute('src', pokemon.data.sprite);
+    image.setAttribute('alt', 'details');
+  
+    listItem.appendChild(anchor);
+    listItem.appendChild(image);
+    
+    return listItem;
+  }
+</script>
