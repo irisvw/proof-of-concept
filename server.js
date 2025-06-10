@@ -122,6 +122,15 @@ app.get("/", async function (req, res) {
   });
 });
 
+app.get("/search", async function (req, res) {
+  let query = req.query.query;
+  let result = allPokemon.filter((pokemon) => pokemon.name.includes(query));
+
+  res.render('index.liquid', {
+    allPokemon: result
+  });
+});
+
 app.get("/:pokemon", async function (req, res) {
   let pokemon = allPokemon.find((pokemon) => pokemon.name == req.params.pokemon);
 

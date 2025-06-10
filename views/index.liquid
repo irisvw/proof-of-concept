@@ -3,21 +3,24 @@
 
 <body>
   <header>
+    <a href="/">
     <img
       src="/assets/logo.webp"
-      alt=""
+        alt="Home"
       width="360">
+    </a>
     <h1>All Pokémon</h1>
 
     <nav>
-      <form action="" class="searchbox">
+      <form action="/search" class="searchbox">
         <label for="search">
           <input
             type="search"
             role="searchbox"
             id="search"
             placeholder=""
-            value="" />
+            value=""
+            name="query" />
           <span>Search</span>
         </label>
         <button type="submit"><img src="/assets/search.svg" alt=""></button>
