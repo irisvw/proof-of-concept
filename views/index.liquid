@@ -129,8 +129,7 @@
     let selection = array.slice(offset, offset + limit);
   
     selection.forEach(element => {
-      listItem = generateListItem(element)
-      console.log(listItem);
+      listItem = generateListItem(element);
       dex.appendChild(listItem);
     });
   }
