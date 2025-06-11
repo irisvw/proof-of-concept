@@ -7,14 +7,16 @@
   <header>
     <a href="/"><img
         src="/assets/logo.webp"
-        alt=""
+        alt="Home"
         width="360"></a>
-    <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
-    <img
-      src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
-      alt=""
-      width="200"
-      style="view-transition-name: {{ pokemon.name }}">
+    <div>
+      <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
+      <img
+        src="{{ pokemon.data.sprite }}"
+        alt=""
+        width="200"
+        style="view-transition-name: {{ pokemon.name }}">
+    </div>
   </header>
 
 
@@ -41,13 +43,19 @@
         <dt>ID</dt>
         <dd>{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</dd>
         <dt>Base XP</dt>
-        <dd>{{ pokemon.data.base_experience }}</dd>
+        <dd>{{ pokemon.data.baseXP }}</dd>
         <dt>Weight</dt>
         <dd>{{ pokemon.data.weight | divided_by: 10 }}kg</dd>
         <dt>Height</dt>
         <dd>{{ pokemon.data.height | divided_by: 10 }}m</dd>
         <dt>Type</dt>
-        <dd>{{ pokemon.data.types[0].type.name | capitalize }} {{ pokemon.data.types[1].type.name | capitalize }}</dd>
+        <dd>
+          <span class="type {{ pokemon.data.types[0].type.name }}">{{ pokemon.data.types[0].type.name | capitalize }}</span>
+
+          {% if pokemon.data.types[1].type.name %}
+            <span class="type {{ pokemon.data.types[1].type.name }}">{{ pokemon.data.types[1].type.name | capitalize }}</span>
+          {% endif %}
+        </dd>
         <dt>Abilities</dt>
         <dd>{{ pokemon.data.abilities[0].ability.name | capitalize }}, {{ pokemon.data.abilities[1].ability.name | capitalize }}</dd>
       </dl>
@@ -64,52 +72,29 @@
     </section>
 
     <section class="tab" id="evolutions">
-      {% comment %} <h2>Evolutions</h2> {% endcomment %}
-      {% if evolution %}
-        <ul class="list-evolutions">
-          {% comment %} Base evolution {% endcomment %}
+      <ul class="list-evolutions">
+        {% for evolution in evolutions %}
           <li>
             <img
-              src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
+              src="{{ evolution.data.sprite }}"
+              alt=""
+              height="100"
+              class="{{ evolution.data.types[0].type.name }}">
+            <p class="pokemon-id">{{ evolution.data.id | prepend: '0000' | slice: -4, 4 }}</p>
+            <a href="/{{ evolution.name }}">{{ evolution.name | capitalize }}</a>
+          </li>
+        {% else %}
+          <li>
+            <img
+              src="{{ pokemon.data.sprite }}"
               alt=""
               height="100"
               class="{{ pokemon.data.types[0].type.name }}">
-            <p class="pokemon-id">{{ pokemon.data.id }}</p>
-            <a href="/{{ evolution.chain.species.name }}">{{ evolution.chain.species.name | capitalize }}</a>
+            <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
+            <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
           </li>
-
-          {% comment %} First stage evolutions {% endcomment %}
-          {% for evolution in evolution.chain.evolves_to %}
-            <li>
-              {% comment %} a {{ evolution.species.name }} b {% endcomment %}
-              {% comment %} {% assign name = evolution.species.name %} {% endcomment %}
-              {% comment %} {% assign pokemon = allPokemon | find: "name", evolution.species.name %} {% endcomment %}
-              {% comment %} {{ pokemon | json | default: "notfound" }} {% endcomment %}
-
-              <img
-                src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
-                alt=""
-                height="100"
-                class="{{ pokemon.data.types[0].type.name }}">
-              <p class="pokemon-id">{{ pokemon.data.id }}</p>
-              <a href="/{{ evolution.chain.species.name }}">{{ evolution.species.name | capitalize }}</a>
-            </li>
-          {% endfor %}
-
-          {% comment %} Second stage evolutions {% endcomment %}
-          {% for evolution in evolution.chain.evolves_to.0.evolves_to %}
-            <li>
-              <img
-                src="{{ pokemon.data.sprites.other.official-artwork.front_default }}"
-                alt=""
-                height="100"
-                class="{{ pokemon.data.types[0].type.name }}">
-              <p class="pokemon-id">{{ pokemon.data.id }}</p>
-              <a href="/{{ evolution.chain.species.name }}">{{ evolution.species.name | capitalize }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
+        {% endfor %}
+      </ul>
     </section>
   </main>
 </body>

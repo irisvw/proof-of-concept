@@ -1,6 +1,8 @@
 // SETUP
 import express from 'express';
 import { Liquid } from 'liquidjs';
+import { readFile, writeFile } from 'node:fs/promises';
+
 
 const app = express();
 const engine = new Liquid();
@@ -14,11 +16,14 @@ app.set('views', './views');
 
 // VARIABLES
 const prefix = "https://pokeapi.co/api/v2/";
-const allPokemon = await getAllPokemon();
+
+// const allPokemon = await getAllPokemon();
+const allPokemonFile = await readFile('./allPokemon.json', { encoding: 'utf8' });
+const allPokemon = JSON.parse(allPokemonFile);
 
 // FUNCTIONS
 async function getAllPokemon() {
-  const apiResponse = await fetch(`${prefix}pokemon?limit=15&offset=180`);
+  const apiResponse = await fetch(`${prefix}pokemon?limit=10000`);
   const apiResponseJSON = await apiResponse.json();
   let allPokemon = apiResponseJSON.results;
 
@@ -26,16 +31,35 @@ async function getAllPokemon() {
     await getPokemonDetails(pokemon);
   }));
 
+  writeFile('./allPokemon.json', JSON.stringify(allPokemon), err => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('file written successfully');
+    }
+  });
+
   return allPokemon;
-}
+};
 
 async function getPokemonDetails(pokemon) {
   const pokemonResponse = await fetch(pokemon.url);
   const pokemonResponseJSON = await pokemonResponse.json();
-  pokemon.data = pokemonResponseJSON;
+  // pokemon.data = pokemonResponseJSON;
+  pokemon.data = {
+    id: pokemonResponseJSON.id,
+    baseXP: pokemonResponseJSON.base_experience,
+    weight: pokemonResponseJSON.weight,
+    height: pokemonResponseJSON.height,
+    abilities: pokemonResponseJSON.abilities,
+    types: pokemonResponseJSON.types,
+    sprite: pokemonResponseJSON.sprites.other['official-artwork'].front_default,
+    stats: pokemonResponseJSON.stats,
+    evolutionChain: pokemonResponseJSON.species.url
+  };
 }
 
-async function getEvolutionData(pokemon) {
+async function getEvolutionChain(pokemon) {
   let pokemonSpeciesData = await fetch(`${prefix}pokemon-species/${pokemon.name}`);
   if (pokemonSpeciesData.status == 404) { return {} };
 
@@ -44,7 +68,36 @@ async function getEvolutionData(pokemon) {
   let evolutionChainData = await fetch(pokemonEvolutionChainURL);
 
   return await evolutionChainData.json();
-}
+};
+
+function getEvolutionDetails(evolutionData) {
+  let evolutionDetails = [];
+  
+  // stage 0
+  let pokemon = allPokemon.find((pokemon) => pokemon.name == evolutionData.chain.species.name);
+  pokemon.evolutions = [];
+  evolutionDetails.push(pokemon);
+
+  // stage 1
+  let stageOneArray = evolutionData.chain.evolves_to;
+  stageOneArray.forEach((evolution) => {
+    let pokemon = allPokemon.find((pokemon) => pokemon.name == evolution.species.name);
+    pokemon.evolutions = evolution.evolves_to;
+    evolutionDetails.push(pokemon);
+  });
+
+  // stage 2
+  evolutionDetails.forEach((pokemon) => {
+    if (pokemon.evolutions.length > 0) {
+      pokemon.evolutions.forEach((evolution) => {
+        let pokemon = allPokemon.find((pokemon) => pokemon.name == evolution.species.name);
+        evolutionDetails.push(pokemon);
+      })
+    }
+  });
+
+  return evolutionDetails;
+};
 
 // ROUTES
 app.get("/", async function (req, res) {
@@ -53,15 +106,25 @@ app.get("/", async function (req, res) {
   });
 });
 
+app.get("/search", async function (req, res) {
+  let query = req.query.query;
+  let result = allPokemon.filter((pokemon) => pokemon.name.includes(query));
+
+  res.render('index.liquid', {
+    allPokemon: result
+  });
+});
+
 app.get("/:pokemon", async function (req, res) {
   let pokemon = allPokemon.find((pokemon) => pokemon.name == req.params.pokemon);
 
   if (pokemon) {
-    let evolutions = getEvolutionData(pokemon);
+    let evolutions = await getEvolutionChain(pokemon);
+    let evolutionsDetails = (Object.keys(evolutions).length == 0) ? [] : getEvolutionDetails(evolutions);
 
     res.render('detail.liquid', {
       pokemon: pokemon,
-      evolution: evolutions
+      evolutions: evolutionsDetails
     });
   } else {
     res.render('error.liquid');
