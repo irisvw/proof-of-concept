@@ -45,7 +45,7 @@ async function getAllPokemon() {
 async function getPokemonDetails(pokemon) {
   const pokemonResponse = await fetch(pokemon.url);
   const pokemonResponseJSON = await pokemonResponse.json();
-  // pokemon.data = pokemonResponseJSON;
+
   pokemon.data = {
     id: pokemonResponseJSON.id,
     baseXP: pokemonResponseJSON.base_experience,
@@ -55,7 +55,8 @@ async function getPokemonDetails(pokemon) {
     types: pokemonResponseJSON.types,
     sprite: pokemonResponseJSON.sprites.other['official-artwork'].front_default,
     stats: pokemonResponseJSON.stats,
-    evolutionChain: pokemonResponseJSON.species.url
+    evolutionChain: pokemonResponseJSON.species.url,
+    speciesName: pokemonResponseJSON.species.name
   };
 }
 
@@ -72,16 +73,16 @@ async function getEvolutionChain(pokemon) {
 
 function getEvolutionDetails(evolutionData) {
   let evolutionDetails = [];
-  
+
   // stage 0
-  let pokemon = allPokemon.find((pokemon) => pokemon.name == evolutionData.chain.species.name);
+  let pokemon = allPokemon.find((pokemon) => pokemon.data.speciesName == evolutionData.chain.species.name);
   pokemon.evolutions = [];
   evolutionDetails.push(pokemon);
 
   // stage 1
   let stageOneArray = evolutionData.chain.evolves_to;
   stageOneArray.forEach((evolution) => {
-    let pokemon = allPokemon.find((pokemon) => pokemon.name == evolution.species.name);
+    let pokemon = allPokemon.find((pokemon) => pokemon.data.speciesName == evolution.species.name);
     pokemon.evolutions = evolution.evolves_to;
     evolutionDetails.push(pokemon);
   });
@@ -90,7 +91,7 @@ function getEvolutionDetails(evolutionData) {
   evolutionDetails.forEach((pokemon) => {
     if (pokemon.evolutions.length > 0) {
       pokemon.evolutions.forEach((evolution) => {
-        let pokemon = allPokemon.find((pokemon) => pokemon.name == evolution.species.name);
+        let pokemon = allPokemon.find((pokemon) => pokemon.data.speciesName == evolution.species.name);
         evolutionDetails.push(pokemon);
       })
     }
