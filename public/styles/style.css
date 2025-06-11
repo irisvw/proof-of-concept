@@ -347,9 +347,16 @@ main.error {
         background-color: var(--color-primary-daylight);
         border: none;
         border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        transition: .1s all;
 
         &:hover {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: var(--color-primary-purple);
+            outline: 1px solid black;
+            transition: .1s all;
+
+            img {
+                filter: invert(1);
+            }
         }
 
         >img {
