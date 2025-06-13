@@ -227,10 +227,15 @@ form button {
             max-width: 60%;
             object-fit: contain;
             transition: .2s all;
+            grid-row: 2 / 3;
+            grid-column: 1 / 2;
             justify-self: flex-end;
         }
 
         form {
+            grid-row: 2 / 3;
+            grid-column: 1 / 2;
+            align-self: flex-end;
             width: min-content;
             position: relative;
             z-index: 2;
