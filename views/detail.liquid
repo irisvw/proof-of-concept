@@ -88,7 +88,7 @@
     <section class="tab" id="evolutions">
       <ul class="list-evolutions">
         {% for evolution in evolutions %}
-          <li>
+          <li class="card">
             <img
               src="{{ evolution.data.sprite }}"
               alt=""
@@ -98,7 +98,7 @@
             <a href="/{{ evolution.name }}">{{ evolution.name | capitalize }}</a>
           </li>
         {% else %}
-          <li>
+          <li class="card">
             <img
               src="{{ pokemon.data.sprite }}"
               alt=""
@@ -112,5 +112,4 @@
     </section>
   </main>
 </body>
-
 {% render 'partials/foot.liquid' %}
