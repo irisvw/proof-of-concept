@@ -321,35 +321,47 @@ form[method="POST"] {
         width: 100%;
     }
 
-    div span {
+    span {
         position: absolute;
         scale: 1.5;
         opacity: 0;
         transform-origin: center;
     }
 
-    div span:nth-of-type(1) {
+    span:nth-of-type(1) {
         top: 0;
         left: 33%;
         rotate: -135deg;
     }
 
-    div span:nth-of-type(2) {
+    span:nth-of-type(2) {
         top: 0;
         left: 33%;
         rotate: -90deg;
     }
 
-    div span:nth-of-type(3) {
+    span:nth-of-type(3) {
         top: 0;
         left: 33%;
         rotate: -45deg;
     }
 
-    &.animation-success div span {
+    &.animation-success span {
         animation-fill-mode: forwards;
         animation: stars 2s linear;
     }
+
+    &.loading button {
+        animation: wobbling 2s linear;
+    }
+}
+
+@keyframes wobbling {
+  0% { transform: rotate(0deg); }
+  5% { transform: rotate(-10deg); }
+  10% { transform: rotate(0deg); }
+  90% { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
 }
 
 @keyframes stars {
@@ -379,7 +391,6 @@ li.card {
         left: 0;
     }
 }
-
 
 .button-load-more {
     display: block;

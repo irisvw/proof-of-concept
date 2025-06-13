@@ -15,6 +15,7 @@ document.addEventListener('submit', async function (event) {
     // Voorkom de standaard submit van de browser
     // Let op: hiermee overschrijven we de default Loading state van de browser...
     event.preventDefault()
+    form.classList.add('loading');
 
     // Verzamel alle formuliervelden van het formulier
     let formData = new FormData(form)
@@ -54,6 +55,5 @@ document.addEventListener('submit', async function (event) {
 
     const newForm = document.querySelector('[data-enhanced="' + form.getAttribute('data-enhanced') + '"]');
     newForm.classList.add('animation-success');
-    // form.classList.add('animation-success');
 })
 
