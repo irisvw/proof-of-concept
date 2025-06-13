@@ -160,6 +160,40 @@ app.get("/:pokemon", async function (req, res) {
   };
 });
 
+app.post("/:pokemon/catch", async function (req, res) {
+  favPokemon.push(req.params.pokemon);
+  console.log(favPokemon);
+  console.log(JSON.stringify(favPokemon));
+
+  await fetch(`https://fdnd.directus.app/items/person/154?fields=custom`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      favPokemon
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+
+  res.redirect(303, `/`);
+});
+
+app.post("/:pokemon/release", async function (req, res) {
+  favPokemon.splice(favPokemon.indexOf(req.params.pokemon), 1);
+
+  await fetch(`https://fdnd.directus.app/items/person/154?fields=custom`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      favPokemon
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+
+  res.redirect(303, `/`);
+});
+
 // PORT
 app.listen(app.get('port'), function () {
   console.log(`Application started on http://localhost:${app.get('port')}`);
