@@ -9,22 +9,11 @@
         src="/assets/logo.webp"
         alt="Home"
         width="360"></a>
+
     <div>
-      {% if favorites contains pokemon.name %}
-        <form
-          method="POST"
-          action="/{{ pokemon.name }}/release"
-          data-enhanced="form-{{ pokemon.name }}">
-          <button type="submit">Release</button>
-        </form>
-      {% else %}
-        <form
-          method="POST"
-          action="/{{ pokemon.name }}/catch"
-          data-enhanced="form-{{ pokemon.name }}">
-          <button type="submit">Catch</button>
-        </form>
-      {% endif %}
+      {% render 'partials/form.liquid'
+        , pokemon: pokemon
+        , favorites: favorites %}
 
       <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
       <img

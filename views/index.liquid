@@ -167,24 +167,12 @@
   <main>
     <ul class="grid-dex">
       {% for pokemon in allPokemon limit: 12 %}
-        <li class="{{ pokemon.data.types[0].type.name }} pokeball-bg">
+        <li class="{{ pokemon.data.types[0].type.name }} pokeball-bg card">
           <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
 
-          {% if favorites contains pokemon.name %}
-            <form
-              method="POST"
-              action="/{{ pokemon.name }}/release"
-              data-enhanced="form-{{ pokemon.name }}">
-              <button type="submit">Release</button>
-            </form>
-          {% else %}
-            <form
-              method="POST"
-              action="/{{ pokemon.name }}/catch"
-              data-enhanced="form-{{ pokemon.name }}">
-              <button type="submit">Catch</button>
-            </form>
-          {% endif %}
+         {% render 'partials/form.liquid'
+        , pokemon: pokemon
+        , favorites: favorites %}
 
           <img
             src="{{ pokemon.data.sprite }}"
