@@ -127,6 +127,20 @@ app.get("/search", async function (req, res) {
   });
 });
 
+app.get("/caught", async function (req, res) {
+  let result = [];
+
+  favPokemon.forEach(entry => {
+    let pokemon = allPokemon.find((pokemon) => pokemon.name == entry);
+    result.push(pokemon);
+  });
+
+  res.render('index.liquid', {
+    allPokemon: result,
+    favorites: favPokemon
+  });
+})
+
 app.get("/:pokemon", async function (req, res) {
   let pokemon = allPokemon.find((pokemon) => pokemon.name == req.params.pokemon);
 
