@@ -115,7 +115,8 @@ function getEvolutionDetails(evolutionData) {
 app.get("/", async function (req, res) {
   res.render('index.liquid', {
     allPokemon: allPokemon,
-    favorites: favPokemon
+    favorites: favPokemon,
+    page: 'all',
   });
 });
 
@@ -125,7 +126,8 @@ app.get("/search", async function (req, res) {
 
   res.render('index.liquid', {
     allPokemon: result,
-    favorites: favPokemon
+    favorites: favPokemon,
+    page: 'all',
   });
 });
 
@@ -139,7 +141,8 @@ app.get("/caught", async function (req, res) {
 
   res.render('index.liquid', {
     allPokemon: result,
-    favorites: favPokemon
+    favorites: favPokemon,
+    page: 'caught',
   });
 })
 
@@ -162,8 +165,6 @@ app.get("/:pokemon", async function (req, res) {
 
 app.post("/:pokemon/catch", async function (req, res) {
   favPokemon.push(req.params.pokemon);
-  console.log(favPokemon);
-  console.log(JSON.stringify(favPokemon));
 
   await fetch(`https://fdnd.directus.app/items/person/154?fields=custom`, {
     method: 'PATCH',
