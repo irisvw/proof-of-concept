@@ -213,11 +213,11 @@
   
   function generateListItem(pokemon) {
     let favPokemon = {{ favorites | json }};
-    console.log(favPokemon);
   
     let listItem = document.createElement('li');
     let anchor = document.createElement('a');
     let image = document.createElement('img');
+    let icon = document.createElement('img');
     let form = document.createElement('form');
     let button = document.createElement('button');
   
@@ -230,12 +230,19 @@
   
     if (favPokemon.includes(pokemon.name)) {
       form.setAttribute('action', `/${pokemon.name}/release`);
-      button.innerHTML = "release";
+      icon.setAttribute('src', '/assets/pokeball-icon.svg');
     } else {
       form.setAttribute('action', `/${pokemon.name}/catch`);
-      button.innerHTML = "catch";
+      icon.setAttribute('src', '/assets/caught-pokemon.svg');
+    }
+
+    for(let i = 0; i < 3; i++){
+     let span = document.createElement('span');
+     span.innerHTML = "⭐";
+     button.append(span);
     }
   
+    button.appendChild(icon);
     form.appendChild(button);
   
     anchor.innerHTML = pokemon.name;
