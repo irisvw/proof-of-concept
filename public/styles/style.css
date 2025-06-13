@@ -354,14 +354,12 @@ form[method="POST"] {
 
 @keyframes stars {
   0% {
-    /* transform: rotate(var(--direction)) translate(0%); */
     transform: translateX(0px);
     scale: 1.5;
     opacity: 1;
   }
 
   100% {
-    /* transform: rotate(var(--direction) + 360deg) translate(100%); */
     transform: translateX(100px);
     scale: 0;
     opacity: 0;
