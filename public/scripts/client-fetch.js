@@ -50,7 +50,10 @@ document.addEventListener('submit', async function (event) {
 
     // Overschrijf ons formulier met de nieuwe HTML
     // Hier wil je waarschijnlijk de Loading state vervangen door een Success state
-    form.outerHTML = newState.outerHTML
+    form.outerHTML = newState.outerHTML;
 
+    const newForm = document.querySelector('[data-enhanced="' + form.getAttribute('data-enhanced') + '"]');
+    newForm.classList.add('animation-success');
+    // form.classList.add('animation-success');
 })
 

@@ -5,7 +5,13 @@
     data-enhanced="form-{{ pokemon.name }}">
     <button type="submit">
       <img src="/assets/pokeball_icon.svg" alt="">
+      <div>
+        <span>⭐</span>
+        <span>⭐</span>
+        <span>⭐</span>
+      </div>
     </button>
+
   </form>
 {% else %}
   <form
@@ -14,6 +20,11 @@
     data-enhanced="form-{{ pokemon.name }}">
     <button type="submit">
       <img src="/assets/caught-pokemon.svg" alt="">
+      <div>
+        <span>⭐</span>
+        <span>⭐</span>
+        <span>⭐</span>
+      </div>
     </button>
   </form>
 {% endif %}
