@@ -9,7 +9,12 @@
         alt="Home"
         width="360">
     </a>
-    <h1>All Pokémon</h1>
+    {% if page == "all" %}
+      <h1>All Pokémon</h1>
+    {% elsif page == "caught" %}
+      <h1>Caught Pokémon</h1>
+    {% endif %}
+    
 
     <nav>
       <form action="/search" class="searchbox">
@@ -52,7 +57,7 @@
         </svg>
         All Pokémon
       </a>
-      
+
       {% if page == "caught" %}
         <a href="/caught" class="active">
       {% else %}
