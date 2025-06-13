@@ -21,7 +21,18 @@ const prefix = "https://pokeapi.co/api/v2/";
 const allPokemonFile = await readFile('./allPokemon.json', { encoding: 'utf8' });
 const allPokemon = JSON.parse(allPokemonFile);
 
+// fetch custom data from FDND whois API
+let favPokemon = await getFavPokemon();
+
 // FUNCTIONS
+async function getFavPokemon() {
+  const whoisResponse = await fetch('https://fdnd.directus.app/items/person/154?fields=custom');
+  const whoisResponseJSON = await whoisResponse.json();
+  const whoisResponseParsed = JSON.parse(whoisResponseJSON.data.custom);
+
+  return whoisResponseParsed.fav_pokemon;
+}
+
 async function getAllPokemon() {
   const apiResponse = await fetch(`${prefix}pokemon?limit=10000`);
   const apiResponseJSON = await apiResponse.json();
