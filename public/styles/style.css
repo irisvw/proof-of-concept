@@ -373,10 +373,6 @@ li.card {
         grid-column: 1 / 2;
         border-radius: 1rem 0 0 1rem;
         font-weight: 600;
-
-        &:nth-of-type(odd) {
-            background-color: var(--color-primary-daylight);
-        }
     }
 
     dd {
@@ -385,9 +381,15 @@ li.card {
         text-align: end;
         width: 100%;
         border-radius: 0 1rem 1rem 0;
+    }
 
-        &:nth-of-type(odd) {
-            background-color: var(--color-primary-daylight);
+    &.bg-alternate {
+
+        dt,
+        dd {
+            &:nth-of-type(odd) {
+                background-color: var(--color-primary-daylight);
+            }
         }
     }
 
