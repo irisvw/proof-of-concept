@@ -315,7 +315,37 @@ label:has(input[type="radio"]:checked) {
             background-color: var(--color-primary-daylight);
         }
     }
+
+    meter {
+        grid-column: 1 / 3;
+        width: 100%;
+    }
+
+    meter::-webkit-meter-optimum-value {
+        background: var(--color-primary-purple);
+        color: var(--color-primary-purple);
+    }
+
+    @supports (-moz-appearance: none) {
+        meter {
+            height: .5rem;
+            margin: .25rem;
+            border-radius: .5rem;
+            background: none;
+            background-color: lightgrey;
+        }
+
+        meter::-moz-meter-bar {
+            height: .5rem;
+        }
+
+        :-moz-meter-optimum::-moz-meter-bar {
+            background: var(--color-primary-purple);
+        }
+    }
 }
+
+
 
 span.type {
     padding: .25em .5em;
