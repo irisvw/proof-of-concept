@@ -4,6 +4,7 @@
     margin: 0;
 }
 
+/* MARK: general */
 body {
     font-family: var(--font-primary);
     min-height: 100dvh;
@@ -125,9 +126,9 @@ header nav a {
         background-color: var(--color-primary-purple);
         color: white;
 
-    svg {
-        stroke: white;
-    }
+        svg {
+            stroke: white;
+        }
     }
 }
 
@@ -189,6 +190,7 @@ header nav a {
     display: block;
 }
 
+/* MARK: dex */
 .pokeball-bg {
     background-image: url("/assets/ball-background.svg");
     background-blend-mode: soft-light;
@@ -279,16 +281,6 @@ header nav a {
             }
         }
 
-        a::after {
-            content: "";
-            position: absolute;
-            z-index: 1;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-
         &:focus-within {
             outline: 5px solid blue;
             outline-offset: 5px;
@@ -365,6 +357,7 @@ li.card {
     border: none;
 }
 
+/* MARK: details */
 .grid-dl {
     display: grid;
     grid-template-columns: fit-content 1fr;
@@ -427,8 +420,6 @@ li.card {
     }
 }
 
-
-
 span.type {
     padding: .25em .5em;
     border-radius: .5rem;
@@ -471,7 +462,6 @@ span.type {
     }
 }
 
-
 main.error {
     display: flex;
     flex-direction: column;
@@ -493,6 +483,7 @@ main.error {
     border-radius: 1em;
 }
 
+/* MARK: searchbox */
 .searchbox {
     display: grid;
     grid-template-columns: 1fr min-content;
