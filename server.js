@@ -21,7 +21,18 @@ const prefix = "https://pokeapi.co/api/v2/";
 const allPokemonFile = await readFile('./allPokemon.json', { encoding: 'utf8' });
 const allPokemon = JSON.parse(allPokemonFile);
 
+// fetch custom data from FDND whois API
+let favPokemon = await getFavPokemon();
+
 // FUNCTIONS
+async function getFavPokemon() {
+  const whoisResponse = await fetch('https://fdnd.directus.app/items/person/154?fields=custom');
+  const whoisResponseJSON = await whoisResponse.json();
+  const whoisResponseParsed = JSON.parse(whoisResponseJSON.data.custom);
+
+  return whoisResponseParsed.fav_pokemon;
+}
+
 async function getAllPokemon() {
   const apiResponse = await fetch(`${prefix}pokemon?limit=10000`);
   const apiResponseJSON = await apiResponse.json();
@@ -103,7 +114,8 @@ function getEvolutionDetails(evolutionData) {
 // ROUTES
 app.get("/", async function (req, res) {
   res.render('index.liquid', {
-    allPokemon: allPokemon
+    allPokemon: allPokemon,
+    favorites: favPokemon
   });
 });
 
@@ -112,9 +124,24 @@ app.get("/search", async function (req, res) {
   let result = allPokemon.filter((pokemon) => pokemon.name.includes(query));
 
   res.render('index.liquid', {
-    allPokemon: result
+    allPokemon: result,
+    favorites: favPokemon
   });
 });
+
+app.get("/caught", async function (req, res) {
+  let result = [];
+
+  favPokemon.forEach(entry => {
+    let pokemon = allPokemon.find((pokemon) => pokemon.name == entry);
+    result.push(pokemon);
+  });
+
+  res.render('index.liquid', {
+    allPokemon: result,
+    favorites: favPokemon
+  });
+})
 
 app.get("/:pokemon", async function (req, res) {
   let pokemon = allPokemon.find((pokemon) => pokemon.name == req.params.pokemon);
@@ -125,11 +152,46 @@ app.get("/:pokemon", async function (req, res) {
 
     res.render('detail.liquid', {
       pokemon: pokemon,
-      evolutions: evolutionsDetails
+      evolutions: evolutionsDetails,
+      favorites: favPokemon
     });
   } else {
     res.render('error.liquid');
   };
+});
+
+app.post("/:pokemon/catch", async function (req, res) {
+  favPokemon.push(req.params.pokemon);
+  console.log(favPokemon);
+  console.log(JSON.stringify(favPokemon));
+
+  await fetch(`https://fdnd.directus.app/items/person/154?fields=custom`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      favPokemon
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+
+  res.redirect(303, `/`);
+});
+
+app.post("/:pokemon/release", async function (req, res) {
+  favPokemon.splice(favPokemon.indexOf(req.params.pokemon), 1);
+
+  await fetch(`https://fdnd.directus.app/items/person/154?fields=custom`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      favPokemon
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  });
+
+  res.redirect(303, `/`);
 });
 
 // PORT

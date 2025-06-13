@@ -54,6 +54,8 @@
           checked>
       </label>
 
+      <a href="/caught">Caught Pokemon</a>
+
       <label>
         <svg
           width="24"
@@ -98,6 +100,23 @@
       {% for pokemon in allPokemon limit: 12 %}
         <li class="{{ pokemon.data.types[0].type.name }} pokeball-bg">
           <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
+
+          {% if favorites contains pokemon.name %}
+            <form
+              method="POST"
+              action="/{{ pokemon.name }}/release"
+              data-enhanced="form-{{ pokemon.name }}">
+              <button type="submit">Release</button>
+            </form>
+          {% else %}
+            <form
+              method="POST"
+              action="/{{ pokemon.name }}/catch"
+              data-enhanced="form-{{ pokemon.name }}">
+              <button type="submit">Catch</button>
+            </form>
+          {% endif %}
+
           <img
             src="{{ pokemon.data.sprite }}"
             alt=""
@@ -136,19 +155,40 @@
   }
   
   function generateListItem(pokemon) {
+    let favPokemon = {{ favorites | json }};
+    console.log(favPokemon);
+  
     let listItem = document.createElement('li');
     let anchor = document.createElement('a');
     let image = document.createElement('img');
+    let form = document.createElement('form');
+    let button = document.createElement('button');
   
     listItem.classList.add(pokemon.data.types[0].type.name, 'pokeball-bg');
+  
+    form.setAttribute('method', "POST");
+    form.setAttribute('data-enhanced', `form-${pokemon.name}`);
+  
+    button.setAttribute('type', 'submit');
+  
+    if (favPokemon.includes(pokemon.name)) {
+      form.setAttribute('action', `/${pokemon.name}/release`);
+      button.innerHTML = "release";
+    } else {
+      form.setAttribute('action', `/${pokemon.name}/catch`);
+      button.innerHTML = "catch";
+    }
+  
+    form.appendChild(button);
   
     anchor.innerHTML = pokemon.name;
     anchor.setAttribute('href', `/${pokemon.name}`);
   
     image.setAttribute('src', pokemon.data.sprite);
     image.setAttribute('alt', 'details');
-  
+    
     listItem.appendChild(anchor);
+    listItem.appendChild(form);
     listItem.appendChild(image);
     
     return listItem;
