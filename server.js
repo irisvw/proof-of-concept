@@ -114,7 +114,8 @@ function getEvolutionDetails(evolutionData) {
 // ROUTES
 app.get("/", async function (req, res) {
   res.render('index.liquid', {
-    allPokemon: allPokemon
+    allPokemon: allPokemon,
+    favorites: favPokemon
   });
 });
 
@@ -123,7 +124,8 @@ app.get("/search", async function (req, res) {
   let result = allPokemon.filter((pokemon) => pokemon.name.includes(query));
 
   res.render('index.liquid', {
-    allPokemon: result
+    allPokemon: result,
+    favorites: favPokemon
   });
 });
 
@@ -150,7 +152,8 @@ app.get("/:pokemon", async function (req, res) {
 
     res.render('detail.liquid', {
       pokemon: pokemon,
-      evolutions: evolutionsDetails
+      evolutions: evolutionsDetails,
+      favorites: favPokemon
     });
   } else {
     res.render('error.liquid');
