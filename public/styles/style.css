@@ -352,7 +352,7 @@ form[method="POST"] {
     }
 
     &.loading button {
-        animation: wobbling 2s linear;
+        animation: wobbling 1s linear infinite;
     }
 }
 
@@ -360,7 +360,7 @@ form[method="POST"] {
   0% { transform: rotate(0deg); }
   5% { transform: rotate(-10deg); }
   10% { transform: rotate(0deg); }
-  90% { transform: rotate(5deg); }
+  90% { transform: rotate(7deg); }
   100% { transform: rotate(0deg); }
 }
 
