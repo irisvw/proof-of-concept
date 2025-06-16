@@ -195,7 +195,8 @@
   let limit = 12;
   let button = document.querySelector('.button-load-more');
   let dex = document.querySelector('.grid-dex');
-  let allPokemon = {{ allPokemon | json }}
+  const allPokemon = {{ allPokemon | json }};
+  let favPokemon = {{ favorites | json }};
   
   button.addEventListener('click', () => {
     loadMorePokemon(allPokemon, offset, limit);
@@ -205,45 +206,25 @@
   function loadMorePokemon(array, offset, limit) {
     let selection = array.slice(offset, offset + limit);
   
-    selection.forEach(element => {
-      listItem = generateListItem(element);
+    selection.forEach(pokemon => {
+      if (favPokemon.includes(pokemon.name)) {
+        listItem = generateListItem(pokemon, 'caught');
+      } else {
+        listItem = generateListItem(pokemon, 'empty');
+      }
+      
       dex.appendChild(listItem);
     });
   }
   
-  function generateListItem(pokemon) {
-    let favPokemon = {{ favorites | json }};
-  
+  function generateListItem(pokemon, state) {
     let listItem = document.createElement('li');
     let anchor = document.createElement('a');
     let image = document.createElement('img');
-    let icon = document.createElement('img');
-    let form = document.createElement('form');
-    let button = document.createElement('button');
   
     listItem.classList.add(pokemon.data.types[0].type.name, 'pokeball-bg');
-  
-    form.setAttribute('method', "POST");
-    form.setAttribute('data-enhanced', `form-${pokemon.name}`);
-  
-    button.setAttribute('type', 'submit');
-  
-    if (favPokemon.includes(pokemon.name)) {
-      form.setAttribute('action', `/${pokemon.name}/release`);
-      icon.setAttribute('src', '/assets/pokeball-icon.svg');
-    } else {
-      form.setAttribute('action', `/${pokemon.name}/catch`);
-      icon.setAttribute('src', '/assets/caught-pokemon.svg');
-    }
 
-    for(let i = 0; i < 3; i++){
-     let span = document.createElement('span');
-     span.innerHTML = "⭐";
-     button.append(span);
-    }
-  
-    button.appendChild(icon);
-    form.appendChild(button);
+    let form = generateForm(pokemon, state);
   
     anchor.innerHTML = pokemon.name;
     anchor.setAttribute('href', `/${pokemon.name}`);
@@ -257,4 +238,89 @@
     
     return listItem;
   }
+
+  function generateForm(pokemon, state) {
+    let form = document.createElement('form');
+    let button = document.createElement('button');
+    let icon = document.createElement('img');
+
+    form.setAttribute('method', "POST");
+    form.setAttribute('data-enhanced', `form-${pokemon.name}`);
+  
+    button.setAttribute('type', 'submit');
+  
+    if (state == "caught") {
+      form.setAttribute('action', `/${pokemon.name}/release`);
+      icon.setAttribute('src', '/assets/pokeball-icon.svg');
+    } else {
+      form.setAttribute('action', `/${pokemon.name}/catch`);
+      icon.setAttribute('src', '/assets/caught-pokemon.svg');
+    }
+
+    for(let i = 0; i < 3; i++) {
+     let span = document.createElement('span');
+     span.innerHTML = "⭐";
+     button.append(span);
+    }
+
+    button.appendChild(icon);
+    form.appendChild(button);
+
+    return form;
+  }
+</script>
+
+<script>
+document.addEventListener('submit', async function (event) {
+    let form = event.target;
+
+    if (!form.hasAttribute('data-enhanced')) {
+      return;
+    }
+
+    event.preventDefault();
+    form.classList.add('loading');
+
+    let formData = new FormData(form);
+
+    if (event.submitter) {
+        formData.append(event.submitter.name, event.submitter.value);
+    }
+
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: new URLSearchParams(formData)
+    })
+
+    const responseText = await response.text();
+    const parser = new DOMParser();
+    const responseDOM = parser.parseFromString(responseText, 'text/html');
+    let newState = "";
+
+    try { 
+      newState = responseDOM.querySelector('[data-enhanced="' + form.getAttribute('data-enhanced') + '"]');
+      form.outerHTML = newState.outerHTML;
+    } catch {
+      const action = form.getAttribute('action');
+        
+      const actionSplit = action.split("/");
+      const pokemonName = actionSplit[1];
+      const state = actionSplit[2];
+
+      console.log(actionSplit);
+
+      const pokemon = allPokemon.find((pokemon) => pokemon.name == pokemonName);
+
+      if (state == "catch") {
+        newState = generateForm(pokemon, "caught");
+      } else {
+        newState = generateForm(pokemon, "empty");
+      }
+
+      form.outerHTML = newState.outerHTML;
+    }
+    
+    const newForm = document.querySelector('[data-enhanced="' + form.getAttribute('data-enhanced') + '"]');
+    newForm.classList.add('animation-success');
+})
 </script>
