@@ -30,7 +30,7 @@ async function getFavPokemon() {
   const whoisResponseJSON = await whoisResponse.json();
   const whoisResponseParsed = JSON.parse(whoisResponseJSON.data.custom);
 
-  return whoisResponseParsed.fav_pokemon;
+  return whoisResponseParsed.favPokemon;
 }
 
 async function getAllPokemon() {
@@ -166,10 +166,12 @@ app.get("/:pokemon", async function (req, res) {
 app.post("/:pokemon/catch", async function (req, res) {
   favPokemon.push(req.params.pokemon);
 
-  await fetch(`https://fdnd.directus.app/items/person/154?fields=custom`, {
+  await fetch(`https://fdnd.directus.app/items/person/154`, {
     method: 'PATCH',
     body: JSON.stringify({
-      favPokemon
+      custom: {
+        favPokemon: favPokemon
+      }
     }),
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
@@ -185,7 +187,9 @@ app.post("/:pokemon/release", async function (req, res) {
   await fetch(`https://fdnd.directus.app/items/person/154?fields=custom`, {
     method: 'PATCH',
     body: JSON.stringify({
-      favPokemon
+      custom: {
+        favPokemon: favPokemon
+      }
     }),
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
