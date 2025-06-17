@@ -178,7 +178,15 @@ app.post("/:pokemon/catch", async function (req, res) {
     }
   });
 
-  res.redirect(303, `/`);
+  if (req.body.enhanced) {
+    res.render('partials/form.liquid', {
+      pokemon: req.params.pokemon,
+      action: "release",
+      origin: `${req.body.origin}`
+    })
+  } else {
+    res.redirect(303, `/${req.body.origin}`);
+  }
 });
 
 app.post("/:pokemon/release", async function (req, res) {
@@ -196,7 +204,17 @@ app.post("/:pokemon/release", async function (req, res) {
     }
   });
 
-  res.redirect(303, `/`);
+  if (req.body.enhanced) {
+    // Filter uit allPokemon degene die net veranderd is
+    // render hier het ene formulier dat je net veranderd hebt, met die ene pokemon
+    res.render('partials/form.liquid', {
+      pokemon: req.params.pokemon,
+      action: "catch",
+      origin: `${req.body.origin}`
+    })
+  } else {
+    res.redirect(303, `/${req.body.origin}`);
+  }
 });
 
 // PORT
