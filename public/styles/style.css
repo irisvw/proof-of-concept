@@ -375,7 +375,8 @@ form[method="POST"] {
 }
 
 .button-load-more {
-    display: block;
+    display: flex;
+    flex-direction: row;
     position: fixed;
     z-index: 2;
     bottom: 2%;
@@ -383,16 +384,19 @@ form[method="POST"] {
     right: 0;
 
     margin: 0 auto;
-    padding: 1rem 2rem;
-    width: max-content;
+    justify-content: center;
 
-    font-size: 1rem;
-    font-family: inherit;
-
-    border-radius: 1rem;
-    background-color: var(--color-primary-purple);
-    color: white;
-    border: none;
+    a {
+        padding: 1rem 2rem;
+        width: max-content;
+        font-size: var(--font-size-m);
+        font-family: inherit;
+        border-radius: var(--border-radius);
+        background-color: var(--color-primary-purple);
+        color: white;
+        border: none;
+        margin-inline: 1rem;
+    }
 }
 
 /* MARK: details */
@@ -549,7 +553,7 @@ form[method="POST"] {
         border-radius: var(--border-radius) 0 0 var(--border-radius);
         background-color: var(--color-primary-daylight);
         font-family: var(--font-primary);
-        font-size: 1rem;
+        font-size: var(--font-size-m);
         padding: 0 1em;
         height: 3rem;
     }
