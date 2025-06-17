@@ -112,7 +112,7 @@ header nav a {
     width: 100%;
     height: 3rem;
     padding: 1em;
-    border-radius: 1rem;
+    border-radius: var(--border-radius);
     background-color: var(--color-primary-daylight);
 
     color: black;
@@ -357,28 +357,42 @@ form[method="POST"] {
 }
 
 @keyframes wobbling {
-  0% { transform: rotate(0deg); }
-  5% { transform: rotate(-10deg); }
-  10% { transform: rotate(0deg); }
-  90% { transform: rotate(7deg); }
-  100% { transform: rotate(0deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    5% {
+        transform: rotate(-10deg);
+    }
+
+    10% {
+        transform: rotate(0deg);
+    }
+
+    90% {
+        transform: rotate(7deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 @keyframes stars {
-  0% {
-    transform: translateX(0px);
-    scale: 1.5;
-    opacity: 1;
-  }
+    0% {
+        transform: translateX(0px);
+        scale: 1.5;
+        opacity: 1;
+    }
 
-  100% {
-    transform: translateX(100px);
-    scale: 0;
-    opacity: 0;
-  }
+    100% {
+        transform: translateX(100px);
+        scale: 0;
+        opacity: 0;
+    }
 }
 
-li.card {
+.card {
     position: relative;
 
     a::after {
@@ -427,7 +441,7 @@ li.card {
 
     dt {
         grid-column: 1 / 2;
-        border-radius: 1rem 0 0 1rem;
+        border-radius: var(--border-radius) 0 0 var(--border-radius);
         font-weight: 600;
     }
 
@@ -436,7 +450,7 @@ li.card {
         justify-self: end;
         text-align: end;
         width: 100%;
-        border-radius: 0 1rem 1rem 0;
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
     }
 
     &.bg-alternate {
@@ -478,7 +492,8 @@ li.card {
     }
 }
 
-span.type {
+/* A container for a pokemon's type */
+.type {
     padding: .25em .5em;
     border-radius: .5rem;
     font-weight: 600;

@@ -98,4 +98,5 @@
 body {
     --font-primary: 'rubik', sans-serif;
     --border-radius: 1rem;
+    --font-size-m: 1rem;
 }
