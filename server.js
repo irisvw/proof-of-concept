@@ -16,6 +16,7 @@ app.set('views', './views');
 
 // VARIABLES
 const prefix = "https://pokeapi.co/api/v2/";
+const limit = 12;
 
 // const allPokemon = await getAllPokemon();
 const allPokemonFile = await readFile('./allPokemon.json', { encoding: 'utf8' });
@@ -24,7 +25,7 @@ const allPokemon = JSON.parse(allPokemonFile);
 // fetch custom data from FDND whois API
 let favPokemon = await getFavPokemon();
 
-// FUNCTIONS
+// MARK: FUNCTIONS
 async function getFavPokemon() {
   const whoisResponse = await fetch('https://fdnd.directus.app/items/person/154?fields=custom');
   const whoisResponseJSON = await whoisResponse.json();
@@ -111,7 +112,7 @@ function getEvolutionDetails(evolutionData) {
   return evolutionDetails;
 };
 
-// ROUTES
+// MARK: ROUTES
 app.get("/", async function (req, res) {
   res.render('index.liquid', {
     allPokemon: allPokemon,
@@ -120,14 +121,25 @@ app.get("/", async function (req, res) {
   });
 });
 
+app.get("/page/:id", async function (req, res) {
+  let id = req.params.id;
+  let offset = (id - 1) * limit;
+
+  res.render('index.liquid', {
+    allPokemon: allPokemon.slice(offset, offset + limit),
+    favorites: favPokemon,
+    page: 'all',
+    pageID: id
+  });
+});
+
 app.get("/search", async function (req, res) {
   let query = req.query.query;
   let result = allPokemon.filter((pokemon) => pokemon.name.includes(query));
 
-  res.render('index.liquid', {
+  res.render('search.liquid', {
     allPokemon: result,
     favorites: favPokemon,
-    page: 'all',
   });
 });
 
@@ -139,10 +151,9 @@ app.get("/caught", async function (req, res) {
     result.push(pokemon);
   });
 
-  res.render('index.liquid', {
+  res.render('caught.liquid', {
     allPokemon: result,
     favorites: favPokemon,
-    page: 'caught',
   });
 })
 
