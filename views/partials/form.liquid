@@ -1,21 +1,29 @@
-{% if favorites contains pokemon.name %}
+{% if action == "release" %}
   <form
     method="POST"
-    action="/{{ pokemon.name }}/release"
-    data-enhanced="form-{{ pokemon.name }}">
+    action="/{{ pokemon }}/release"
+    data-enhanced="form-{{ pokemon }}">
+    <input
+      type="hidden"
+      name="origin"
+      value="{{ origin }}">
     <button type="submit">
       <img src="/assets/pokeball-icon.svg" alt="">
       <span>⭐</span>
       <span>⭐</span>
       <span>⭐</span>
     </button>
-
   </form>
+
 {% else %}
   <form
     method="POST"
-    action="/{{ pokemon.name }}/catch"
-    data-enhanced="form-{{ pokemon.name }}">
+    action="/{{ pokemon }}/catch"
+    data-enhanced="form-{{ pokemon }}">
+    <input
+      type="hidden"
+      name="origin"
+      value="{{ origin }}">
     <button type="submit">
       <img src="/assets/caught-pokemon.svg" alt="">
       <span>⭐</span>

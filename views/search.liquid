@@ -1,0 +1,35 @@
+{% layout "layouts/overview.liquid"
+  , title: "Results"
+  , page: "all" %}
+
+{% block content %}
+  <main>
+    <ul class="grid-dex">
+      {% for pokemon in allPokemon %}
+        <li class="{{ pokemon.data.types[0].type.name }} pokeball-bg card">
+          <a href="/{{ pokemon.name }}">{{ pokemon.name | capitalize }}</a>
+
+          {% if favorites contains pokemon.name %}
+            {% render 'partials/form.liquid'
+              , pokemon: pokemon.name
+              , origin: ''
+              , action: "release" %}
+          {% else %}
+            {% render 'partials/form.liquid'
+              , pokemon: pokemon.name
+              , origin: ''
+              , action: "catch" %}
+          {% endif %}
+
+          <img
+            src="{{ pokemon.data.sprite }}"
+            alt=""
+            style="view-transition-name: {{ pokemon.name }}"
+            loading="lazy"
+            height="175">
+        </li>
+      {% endfor %}
+    </ul>
+  </main>
+</body>
+{% render 'partials/foot.liquid' %}{% endblock %}
