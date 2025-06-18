@@ -134,7 +134,7 @@ app.get("/page/:id", async function (req, res) {
 });
 
 app.get("/search", async function (req, res) {
-  let query = req.query.query;
+  let query = req.query.query.toLowerCase();
   let result = allPokemon.filter((pokemon) => pokemon.name.includes(query));
 
   res.render('search.liquid', {
