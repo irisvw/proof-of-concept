@@ -49,7 +49,7 @@
     </ul>
 
     <section class="tab" id="about">
-      {% comment %} <h2>About</h2> {% endcomment %}
+      <h2 class="visually-hidden">About</h2>
       <dl class="grid-dl bg-alternate">
         <dt>Name</dt>
         <dd>{{ pokemon.name | capitalize }}</dd>
@@ -82,7 +82,7 @@
     </section>
 
     <section class="tab" id="stats">
-      {% comment %} <h2>Stats</h2> {% endcomment %}
+      <h2 class="visually-hidden">Stats</h2>
       <dl class="grid-dl">
         {% for stat in pokemon.data.stats %}
           <dt>{{ stat.stat.name | capitalize }}</dt>
@@ -96,6 +96,7 @@
     </section>
 
     <section class="tab" id="evolutions">
+      <h2 class="visually-hidden">Evolutions</h2>
       <ul class="list-evolutions">
         {% for evolution in evolutions %}
           <li class="card">
