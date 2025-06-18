@@ -522,7 +522,7 @@ form[method="POST"] {
 
         a {
             grid-area: name;
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 0.8rem + .75vw, 1.5rem);
             text-decoration: none;
         }
     }
