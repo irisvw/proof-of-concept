@@ -23,8 +23,6 @@
           , action: "catch" %}
       {% endif %}
 
-      {% comment %} {% render 'partials/form.liquid', pokemon: pokemon, cameFrom: '/detail/hulpsa', favorites: favorites %} {% endcomment %}
-
       <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
       <img
         src="{{ pokemon.data.sprite }}"
