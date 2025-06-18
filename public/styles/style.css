@@ -144,6 +144,11 @@ header nav a {
         padding-inline: clamp(.5rem, 1vw, 1rem);
         text-decoration: none;
         font-weight: 600;
+        color: var(--color-primary-purple);
+
+        &:visited {
+            color: var(--color-primary-purple);
+        }
     }
 }
 
