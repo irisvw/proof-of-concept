@@ -32,7 +32,7 @@
     </ul>
   </main>
 
-  <nav class="button-load-more">
+  <nav class="button-load-more flex-horizontal">
     <a href="/page/{{ pageID | default: 1 | minus: 1 | at_least: 1 }}" class="previous">Previous</a>
     <a href="/page/{{ pageID | default: 1 | plus: 1 }}" class="next">Next</a>
   </nav>
