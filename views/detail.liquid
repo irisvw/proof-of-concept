@@ -11,19 +11,20 @@
         width="360"></a>
 
     <div>
-      {% if favorites contains pokemon.name %}
-        {% render 'partials/form.liquid'
-          , pokemon: pokemon.name
-          , origin: pokemon.name
-          , action: "release" %}
-      {% else %}
-        {% render 'partials/form.liquid'
-          , pokemon: pokemon.name
-          , origin: pokemon.name
-          , action: "catch" %}
-      {% endif %}
-
-      <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
+      <div class="flex-horizontal">
+        <p class="pokemon-id">{{ pokemon.data.id | prepend: '0000' | slice: -4, 4 }}</p>
+        {% if favorites contains pokemon.name %}
+          {% render 'partials/form.liquid'
+            , pokemon: pokemon.name
+            , origin: pokemon.name
+            , action: "release" %}
+        {% else %}
+          {% render 'partials/form.liquid'
+            , pokemon: pokemon.name
+            , origin: pokemon.name
+            , action: "catch" %}
+        {% endif %}
+      </div>
       <img
         src="{{ pokemon.data.sprite }}"
         alt=""
