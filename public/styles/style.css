@@ -414,7 +414,14 @@ form[method="POST"] {
         background-color: var(--color-primary-purple);
         color: white;
         border: none;
-        margin-inline: 1rem;
+        text-decoration: none;
+        transition: .1s all;
+
+        &:hover {
+            color: var(--color-primary-purple);
+            background-color: white;
+            outline: 1px solid var(--color-primary-purple);
+        }
     }
 }
 
