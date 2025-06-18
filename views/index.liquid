@@ -32,7 +32,6 @@
     </ul>
   </main>
 
-  {% comment %} <button class="button-load-more">Load More</button> {% endcomment %}
   <nav class="button-load-more">
     <a href="/page/{{ pageID | default: 1 | minus: 1 | at_least: 1 }}" class="previous">Previous</a>
     <a href="/page/{{ pageID | default: 1 | plus: 1 }}" class="next">Next</a>
