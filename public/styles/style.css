@@ -255,6 +255,7 @@ header nav a {
         a {
             display: block;
             width: 100%;
+            max-height: 1lh;
             font-size: clamp(1rem, 0.8rem + 1vw, 2rem);
             color: rgb(47 21 149);
             text-decoration: none;
