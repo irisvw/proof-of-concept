@@ -37,7 +37,12 @@ Onderaan de pagina kan de gebruiker op de 'load more' knop klikken. Dan worden d
 <img src="https://github.com/user-attachments/assets/d0addc42-d560-4091-a513-f63a20e0598e" height=100>
 
 ### Detailpagina met tabjes
-Als de gebruiker op een Pokémon klikt, navigeert deze naar de detailpagina van die Pokémon. Hier kan de gebruiker alle info van die Pokémon zien, onderverdeeld in drie tabjes: 'about', 'stats', en 'evolutions'. In 'stats' staan zowel de statistieken in nummers als een visuele representatie van de stats in een balkje. Vanuit 'evolutions' kan de gebruiker naar elke evolutie van de Pokémon navigeren. Ook vanuit de detailpagina kan de gebruiker de Pokémon 'vangen'.
+Als de gebruiker op een Pokémon klikt, navigeert deze naar de detailpagina van die Pokémon. Hier kan de gebruiker alle info van die Pokémon zien, onderverdeeld in drie tabjes: 'about', 'stats', en 'evolutions'. In 'about' heb ik een subtiele achtergrondkleur toegevoegd aan de oneven rijen informatie, zodat (vooral op bredere schermen) duidelijker is welke informatie bij elkaar hoort. In 'stats' staan zowel de statistieken in nummers als een visuele representatie van de stats in een balkje. Vanuit 'evolutions' kan de gebruiker naar elke evolutie van de Pokémon navigeren. Ook vanuit de detailpagina kan de gebruiker de Pokémon 'vangen'.
+
+<img src="https://github.com/user-attachments/assets/a236dd96-8af5-4250-961b-47a77f75b3b3" height=200>
+<img src="https://github.com/user-attachments/assets/1bae3f96-514c-470b-84f2-8529c5f4168d" height=200>
+
+
 
 ### Zoekbalk
 Vanuit de homepagina kan de gebruiker zoeken op de naam van de Pokémon of een deel daarvan.
