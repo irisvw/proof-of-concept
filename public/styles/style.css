@@ -438,6 +438,10 @@ form[method="POST"] {
     dt {
         line-height: 2;
         padding-inline: 1rem;
+
+        @media (width > 800px) {
+            line-height: 3;
+        }
     }
 
     dt {
