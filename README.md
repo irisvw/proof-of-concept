@@ -56,10 +56,21 @@ Als een Pokémon niet gevonden wordt, wordt er een foutpagina weergegeven.
 
 ## Kenmerken
 <!-- Bij Kenmerken staat welke technieken zijn gebruikt en hoe. Wat is de HTML structuur? Wat zijn de belangrijkste dingen in CSS? Wat is er met JS gedaan en hoe? Misschien heb je iets met NodeJS gedaan, of heb je een framwork of library gebruikt? -->
-- Liquid Templates
-- Client-side Enhancements
-- Pagination
+### Liquid Templates
+Ik heb een Liquid template aangemaakt voor de homepagina zodat ik dezelfde structuur kon gebruiken voor de overzichtpagina en de zoekresultaten. 
+https://github.com/irisvw/proof-of-concept/blob/main/views/layouts/overview.liquid
 
+### Pagination
+De applicatie werkt met pagina's. Op basis van de PageID geeft de server een bepaalde set Pokémon terug. 
+https://github.com/irisvw/proof-of-concept/blob/8d684173b1626aee3f8a5fe364ade05babe12667/server.js#L124-L129
+
+In het Liquid template worden de 'previous' en 'next' link gerenderd door er 1 van af te trekken of toe te voegen.
+https://github.com/irisvw/proof-of-concept/blob/8d684173b1626aee3f8a5fe364ade05babe12667/views/index.liquid#L36-L37
+
+### Client-side Enhancements
+Ik heb een script toegevoegd om de forms te enhancen, zodat de pagina niet meer ververst en er coole animaties afspelen. https://github.com/irisvw/proof-of-concept/blob/main/public/scripts/data-enhance.js
+
+Ook heb ik een extra scriptje toegevoegd voor de pagina's, waardoor de 'next' en 'previous' buttons veranderen in een enkele 'load more' button en de resultaten van de volgende pagina aan de huidige pagina worden toegevoegd. https://github.com/irisvw/proof-of-concept/blob/main/views/index.liquid#L41-L65
 
 
 ## Installatie
